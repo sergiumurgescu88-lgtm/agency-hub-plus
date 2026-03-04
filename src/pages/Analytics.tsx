@@ -114,9 +114,9 @@ function StatCard({ label, value, sub, colorClass }: { label: string; value: str
     <Card className="relative overflow-hidden hover:border-[hsl(var(--gold)/0.25)] transition-all hover:-translate-y-0.5">
       <div className={`absolute top-0 left-0 right-0 h-0.5 ${borders[colorClass] || "gradient-gold-bottom"}`} />
       <CardContent className="p-4">
-        <p className="text-[10px] font-semibold tracking-wider uppercase text-dim mb-1.5">{label}</p>
-        <p className="font-['Syne'] text-2xl font-bold leading-none">{value}</p>
-        <p className="text-[11px] text-dim mt-1">{sub}</p>
+        <p className="text-[11px] font-semibold tracking-wider uppercase text-dim mb-1.5">{label}</p>
+        <p className="text-2xl font-bold leading-none">{value}</p>
+        <p className="text-xs text-dim mt-1">{sub}</p>
       </CardContent>
     </Card>
   );
@@ -128,11 +128,11 @@ function BarChart({ data, maxVal }: { data: { label: string; val: number; cls: s
     <div className="space-y-2.5">
       {data.map(d => (
         <div key={d.label} className="flex items-center gap-2.5 cursor-pointer" onClick={() => toast.info(`${d.label}: ${d.val}${d.unit || ""}`)}>
-          <span className="text-[12.5px] w-[110px] text-right text-dim flex-shrink-0">{d.label}</span>
+          <span className="text-[13px] w-[110px] text-right text-dim flex-shrink-0">{d.label}</span>
           <div className="flex-1 h-[9px] bg-surface2 rounded-[5px] overflow-hidden">
             <div className={`h-full rounded-[5px] ${d.cls}`} style={{ width: `${(d.val / max) * 100}%`, transition: "width 0.8s cubic-bezier(.4,0,.2,1)" }} />
           </div>
-          <span className={`font-['Syne'] text-xs font-bold w-14 flex-shrink-0 ${d.text}`}>{d.val}{d.unit || ""}</span>
+          <span className={`text-xs font-bold w-14 flex-shrink-0 ${d.text}`}>{d.val}{d.unit || ""}</span>
         </div>
       ))}
     </div>
@@ -207,8 +207,8 @@ export default function Analytics() {
       {/* HEADER */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="font-['Syne'] text-xl font-extrabold flex items-center gap-2">📊 Analytics</h1>
-          <p className="text-xs text-dim mt-1">Rapoarte, performanță și insight-uri de piață</p>
+          <h1 className="text-xl font-extrabold flex items-center gap-2">📊 Analytics</h1>
+          <p className="text-sm text-dim mt-1">Rapoarte, performanță și insight-uri de piață</p>
         </div>
         <div className="flex items-center gap-2">
           <Select defaultValue="toti" onValueChange={() => toast.info("🔍 Filtru aplicat")}>
@@ -258,7 +258,7 @@ export default function Analytics() {
             {/* Revenue Chart */}
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">💰 Evoluție Venituri</CardTitle>
+                <CardTitle className="text-sm font-semibold">💰 Evoluție Venituri</CardTitle>
                 <PillToggle options={["Lunar","Săptămânal"]} active={revMode} onChange={v => setRevMode(v as typeof revMode)} />
               </CardHeader>
               <CardContent className="p-4">
@@ -267,7 +267,7 @@ export default function Analytics() {
                     const isLast = i === revData.vals.length - 1;
                     return (
                       <div key={i} className="flex-1 flex flex-col items-center gap-1 cursor-pointer" onClick={() => toast.info(`${revData.labels[i]}: ${euro(v)}`)}>
-                        <span className={`font-['Syne'] text-[10px] font-bold ${isLast ? "text-gold" : "text-transparent"}`}>{isLast ? euro(v) : "."}</span>
+                        <span className={`text-[10px] font-bold ${isLast ? "text-gold" : "text-transparent"}`}>{isLast ? euro(v) : "."}</span>
                         <div className={`w-full rounded-t transition-all duration-500 hover:opacity-75 ${isLast ? "bg-gradient-to-t from-[hsl(var(--gold))] to-[hsl(var(--gold2))]" : "bg-gold-dim"}`}
                           style={{ height: `${(v / revMax) * 120}px` }} />
                       </div>
@@ -285,7 +285,7 @@ export default function Analytics() {
             {/* Pipeline Funnel */}
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">📋 Pipeline Funnel</CardTitle>
+                <CardTitle className="text-sm font-semibold">📋 Pipeline Funnel</CardTitle>
                 <span className="text-xs text-dim">Conversie pas cu pas</span>
               </CardHeader>
               <CardContent className="p-4 space-y-2">
@@ -294,9 +294,9 @@ export default function Analytics() {
                   return (
                     <div key={f.stage} className="cursor-pointer" onClick={() => toast.info(`${f.stage}: ${f.n} leads${i > 0 ? ` (${conv}% conversie)` : ""}`)}>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[12.5px] font-medium">{f.stage}</span>
-                        <span className="font-['Syne'] text-xs font-bold text-gold">
-                          {f.n}{i > 0 && <span className="text-[10.5px] text-dim ml-1.5">→ {conv}% conversie</span>}
+                        <span className="text-[13px] font-medium">{f.stage}</span>
+                        <span className="text-xs font-bold text-gold">
+                          {f.n}{i > 0 && <span className="text-[11px] text-dim ml-1.5">→ {conv}% conversie</span>}
                         </span>
                       </div>
                       <div className="h-2.5 bg-surface2 rounded-[5px] overflow-hidden">
@@ -312,19 +312,19 @@ export default function Analytics() {
           {/* Row 2 */}
           <div className="grid grid-cols-3 gap-4">
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">🏠 Tip Proprietăți</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">🏠 Tip Proprietăți</CardTitle></CardHeader>
               <CardContent className="p-4">
                 <BarChart data={PROP_TYPES.map(d => ({ ...d, unit: "%" }))} />
               </CardContent>
             </Card>
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📥 Surse Lead-uri</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📥 Surse Lead-uri</CardTitle></CardHeader>
               <CardContent className="p-4">
                 <BarChart data={LEAD_SOURCES.map(d => ({ ...d, unit: "%" }))} />
               </CardContent>
             </Card>
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">⏱ Timp Mediu Vânzare / Tip</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">⏱ Timp Mediu Vânzare / Tip</CardTitle></CardHeader>
               <CardContent className="p-4">
                 <BarChart data={TIME_TO_SELL.map(d => ({ label: d.label, val: d.days, cls: d.cls, text: d.text, unit: "z" }))} />
               </CardContent>
@@ -337,22 +337,22 @@ export default function Analytics() {
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">🏆 Clasament Comisioane</CardTitle>
+                <CardTitle className="text-sm font-semibold">🏆 Clasament Comisioane</CardTitle>
                 <span className="text-xs text-dim">Martie 2025</span>
               </CardHeader>
               <CardContent className="p-0">
                 {sortedByCom.map((ag, i) => (
                   <div key={ag.name} className="flex items-center gap-3 px-4 py-3 border-b border-subtle/30 last:border-b-0 hover:bg-surface2 cursor-pointer"
                     onClick={() => toast.info(`${ag.name}: ${euro(ag.com)} comisioane, ${ag.tranz} tranzacții`)}>
-                    <span className="font-['Syne'] text-base font-extrabold w-7 text-center">{medals[i] || (i + 1)}</span>
-                    <div className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center font-['Syne'] font-bold text-[13px] text-background flex-shrink-0"
+                    <span className="text-base font-extrabold w-7 text-center">{medals[i] || (i + 1)}</span>
+                    <div className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center font-bold text-[13px] text-background flex-shrink-0"
                       style={{ background: ag.color }}>{ag.initials}</div>
                     <div className="flex-1">
-                      <p className="text-[13.5px] font-semibold">{ag.name}</p>
-                      <p className="text-[11.5px] text-dim">{ag.tranz} tranzacții • {ag.conv}% conv.</p>
+                      <p className="text-[14px] font-semibold">{ag.name}</p>
+                      <p className="text-xs text-dim">{ag.tranz} tranzacții • {ag.conv}% conv.</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-['Syne'] text-sm font-bold" style={{ color: ag.color }}>{euro(ag.com)}</p>
+                      <p className="text-sm font-bold" style={{ color: ag.color }}>{euro(ag.com)}</p>
                       <Badge className={`text-[11px] border-0 ${ag.delta.startsWith("+") ? "bg-teal-dim text-teal" : "bg-red-dim text-danger"}`}>
                         {ag.delta.startsWith("+") ? "↑" : "↓"} {ag.delta}
                       </Badge>
@@ -362,20 +362,20 @@ export default function Analytics() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">💼 Clasament Tranzacții</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">💼 Clasament Tranzacții</CardTitle></CardHeader>
               <CardContent className="p-0">
                 {sortedByTranz.map((ag, i) => (
                   <div key={ag.name} className="flex items-center gap-3 px-4 py-3 border-b border-subtle/30 last:border-b-0 hover:bg-surface2 cursor-pointer"
                     onClick={() => toast.info(`${ag.name}: ${ag.tranz} tranzacții finalizate`)}>
-                    <span className="font-['Syne'] text-base font-extrabold w-7 text-center">{medals[i] || (i + 1)}</span>
-                    <div className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center font-['Syne'] font-bold text-[13px] text-background flex-shrink-0"
+                    <span className="text-base font-extrabold w-7 text-center">{medals[i] || (i + 1)}</span>
+                    <div className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center font-bold text-[13px] text-background flex-shrink-0"
                       style={{ background: ag.color }}>{ag.initials}</div>
                     <div className="flex-1">
-                      <p className="text-[13.5px] font-semibold">{ag.name}</p>
-                      <p className="text-[11.5px] text-dim">⭐ {ag.rating} satisfacție clienți</p>
+                      <p className="text-[14px] font-semibold">{ag.name}</p>
+                      <p className="text-xs text-dim">⭐ {ag.rating} satisfacție clienți</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-['Syne'] text-sm font-bold">{ag.tranz} <span className="text-[11px] text-dim font-normal">tranz.</span></p>
+                      <p className="text-sm font-bold">{ag.tranz} <span className="text-xs text-dim font-normal">tranz.</span></p>
                       <Badge className="text-[11px] border-0 bg-teal-dim text-teal">↑ target {ag.target}%</Badge>
                     </div>
                   </div>
@@ -387,21 +387,21 @@ export default function Analytics() {
           {/* Perf Table */}
           <Card>
             <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-              <CardTitle className="text-sm font-['Syne']">📊 Performanță Agenți — Comparație 6 luni</CardTitle>
+              <CardTitle className="text-sm font-semibold">📊 Performanță Agenți — Comparație 6 luni</CardTitle>
               <Button variant="outline" size="sm" className="text-xs" onClick={() => toast.success("📊 Raport agenți exportat")}><Download className="w-3.5 h-3.5" />Export</Button>
             </CardHeader>
             <CardContent className="p-0 overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-[10.5px]">Agent</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Tranzacții</TableHead>
-                    <TableHead className="text-[10.5px]">Comisioane</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Conversie</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Timp mediu</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Satisfacție</TableHead>
-                    <TableHead className="text-[10.5px]">Target %</TableHead>
-                    <TableHead className="text-[10.5px]">Trend</TableHead>
+                    <TableHead className="text-[11px]">Agent</TableHead>
+                    <TableHead className="text-[11px] text-center">Tranzacții</TableHead>
+                    <TableHead className="text-[11px]">Comisioane</TableHead>
+                    <TableHead className="text-[11px] text-center">Conversie</TableHead>
+                    <TableHead className="text-[11px] text-center">Timp mediu</TableHead>
+                    <TableHead className="text-[11px] text-center">Satisfacție</TableHead>
+                    <TableHead className="text-[11px]">Target %</TableHead>
+                    <TableHead className="text-[11px]">Trend</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -409,22 +409,22 @@ export default function Analytics() {
                     <TableRow key={ag.name} className="cursor-pointer" onClick={() => toast.info(`📊 Profil detaliat: ${ag.name}`)}>
                       <TableCell>
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center font-['Syne'] font-bold text-[11px]"
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-[11px]"
                             style={{ color: ag.color, background: `${ag.color}20` }}>{ag.initials}</div>
                           <span className="font-medium text-[13px]">{ag.name}</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-center font-['Syne'] font-bold">{ag.tranz}</TableCell>
-                      <TableCell className="font-['Syne'] font-bold text-gold">{euro(ag.com)}</TableCell>
+                      <TableCell className="text-center font-bold">{ag.tranz}</TableCell>
+                      <TableCell className="font-bold text-gold">{euro(ag.com)}</TableCell>
                       <TableCell className="text-center">
-                        <span className={`font-['Syne'] text-[13px] font-bold ${ag.conv > 28 ? "text-teal" : ag.conv > 20 ? "text-gold" : "text-danger"}`}>{ag.conv}%</span>
+                        <span className={`text-[13px] font-bold ${ag.conv > 28 ? "text-teal" : ag.conv > 20 ? "text-gold" : "text-danger"}`}>{ag.conv}%</span>
                       </TableCell>
                       <TableCell className="text-center text-dim">{ag.timp} zile</TableCell>
                       <TableCell className="text-center"><span className="text-gold">⭐</span> {ag.rating}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Progress value={ag.target} className="h-1.5 flex-1" />
-                          <span className={`font-['Syne'] text-xs font-bold w-9 ${ag.target >= 80 ? "text-teal" : ag.target >= 60 ? "text-gold" : "text-danger"}`}>{ag.target}%</span>
+                          <span className={`text-xs font-bold w-9 ${ag.target >= 80 ? "text-teal" : ag.target >= 60 ? "text-gold" : "text-danger"}`}>{ag.target}%</span>
                         </div>
                       </TableCell>
                       <TableCell><Sparkline vals={ag.trend} color={ag.color} /></TableCell>
@@ -441,7 +441,7 @@ export default function Analytics() {
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">🗺️ Activitate pe Zone — București</CardTitle>
+                <CardTitle className="text-sm font-semibold">🗺️ Activitate pe Zone — București</CardTitle>
                 <PillToggle options={["Tranzacții","Preț/mp","Cerere"]} active={hmMode} onChange={v => setHmMode(v as typeof hmMode)} />
               </CardHeader>
               <CardContent className="p-4">
@@ -459,7 +459,7 @@ export default function Analytics() {
                         style={{ background: `rgba(200,169,110,${alpha.toFixed(2)})`, border: `1px solid rgba(200,169,110,${(alpha * 0.4).toFixed(2)})` }}
                         onClick={() => toast.info(`${name}: ${lbl}`)}>
                         <span className="text-[9px] font-bold" style={{ color: `rgba(255,255,255,${0.4 + intensity * 0.6})` }}>{name}</span>
-                        <span className="font-['Syne'] text-[11px] font-extrabold" style={{ color: `rgba(255,255,255,${0.5 + intensity * 0.5})` }}>
+                        <span className="text-[11px] font-extrabold" style={{ color: `rgba(255,255,255,${0.5 + intensity * 0.5})` }}>
                           {hmMode === "Preț/mp" ? `€${v}` : v}
                         </span>
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-surface2 border border-subtle2 text-foreground px-2 py-1 rounded-md text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
@@ -469,7 +469,7 @@ export default function Analytics() {
                     );
                   })}
                 </div>
-                <div className="flex items-center gap-2 mt-3 text-[11.5px] text-dim">
+                <div className="flex items-center gap-2 mt-3 text-xs text-dim">
                   <span>Scăzut</span>
                   <div className="flex gap-0.5">
                     {[0.08, 0.25, 0.45, 0.7, 0.95].map(a => (
@@ -482,7 +482,7 @@ export default function Analytics() {
             </Card>
 
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📍 Top Zone după Activitate</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📍 Top Zone după Activitate</CardTitle></CardHeader>
               <CardContent className="p-0">
                 {topZones.map((z, i) => {
                   const v = z[hmKey as keyof typeof z] as number;
@@ -491,14 +491,14 @@ export default function Analytics() {
                   return (
                     <div key={z.name} className="flex items-center gap-3 px-4 py-2.5 border-b border-subtle/30 last:border-b-0 cursor-pointer hover:bg-surface2"
                       onClick={() => toast.info(`${z.name}: ${lbl}`)}>
-                      <span className={`font-['Syne'] text-sm font-extrabold w-5 text-center ${i < 3 ? "text-gold" : "text-dim"}`}>{i + 1}</span>
+                      <span className={`text-sm font-extrabold w-5 text-center ${i < 3 ? "text-gold" : "text-dim"}`}>{i + 1}</span>
                       <div className="flex-1">
                         <p className="text-[13px] font-semibold mb-1">📍 {z.name}</p>
                         <div className="h-[5px] bg-surface2 rounded-full overflow-hidden">
                           <div className="h-full rounded-full" style={{ width: `${pct}%`, background: z.color, transition: "width 0.8s" }} />
                         </div>
                       </div>
-                      <span className="font-['Syne'] text-[13px] font-bold" style={{ color: z.color }}>{lbl}</span>
+                      <span className="text-[13px] font-bold" style={{ color: z.color }}>{lbl}</span>
                     </div>
                   );
                 })}
@@ -506,7 +506,7 @@ export default function Analytics() {
             </Card>
 
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📊 Distribuție Tipuri / Zonă</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📊 Distribuție Tipuri / Zonă</CardTitle></CardHeader>
               <CardContent className="p-4">
                 <BarChart data={[
                   { label: "Apartament", val: 52, cls: "bg-[hsl(var(--gold))]", text: "text-gold", unit: "%" },
@@ -518,7 +518,7 @@ export default function Analytics() {
             </Card>
 
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">💶 Preț Mediu €/mp pe Zone</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">💶 Preț Mediu €/mp pe Zone</CardTitle></CardHeader>
               <CardContent className="p-4">
                 <BarChart data={[...ZONES].sort((a, b) => b.pret - a.pret).slice(0, 6).map(z => ({
                   label: z.name, val: z.pret, cls: "bg-[hsl(var(--gold))]", text: "text-gold", unit: "",
@@ -533,7 +533,7 @@ export default function Analytics() {
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">📈 Evoluție Preț €/mp</CardTitle>
+                <CardTitle className="text-sm font-semibold">📈 Evoluție Preț €/mp</CardTitle>
                 <PillToggle options={["6 luni","1 an","3 ani"]} active={priceMode} onChange={v => setPriceMode(v as typeof priceMode)} />
               </CardHeader>
               <CardContent className="p-4">
@@ -543,7 +543,7 @@ export default function Analytics() {
                     const h = priceMax === priceMin ? 60 : ((v - priceMin) / (priceMax - priceMin)) * 90 + 20;
                     return (
                       <div key={i} className="flex-1 flex flex-col items-center gap-1 cursor-pointer" onClick={() => toast.info(`${priceData.labels[i]}: €${v}/mp`)}>
-                        <span className={`text-[9px] font-bold font-['Syne'] ${isLast ? "text-gold" : "text-transparent"}`}>{isLast ? `€${v}` : "."}</span>
+                        <span className={`text-[10px] font-bold ${isLast ? "text-gold" : "text-transparent"}`}>{isLast ? `€${v}` : "."}</span>
                         <div className={`w-full rounded-t transition-all duration-500 hover:opacity-70 ${isLast ? "bg-gradient-to-t from-[hsl(var(--gold))] to-[hsl(var(--gold2))]" : "bg-gold-dim"}`}
                           style={{ height: `${h}px` }} />
                       </div>
@@ -552,16 +552,16 @@ export default function Analytics() {
                 </div>
                 <div className="flex gap-1.5 mt-1.5">
                   {priceData.labels.map((l, i) => (
-                    <div key={l} className={`flex-1 text-center text-[9.5px] ${i === priceData.labels.length - 1 ? "text-gold font-bold" : "text-dim"}`}>{l}</div>
+                    <div key={l} className={`flex-1 text-center text-[10px] ${i === priceData.labels.length - 1 ? "text-gold font-bold" : "text-dim"}`}>{l}</div>
                   ))}
                 </div>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">⚖️ Cerere vs Ofertă</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">⚖️ Cerere vs Ofertă</CardTitle></CardHeader>
               <CardContent className="p-4 space-y-3.5">
-                <div className="flex gap-4 text-[11.5px]">
+                <div className="flex gap-4 text-xs">
                   <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[hsl(var(--gold))]" />Cerere</div>
                   <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[hsl(var(--blue)/0.7)]" />Ofertă</div>
                 </div>
@@ -584,7 +584,7 @@ export default function Analytics() {
           </div>
 
           <Card>
-            <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">🏘️ Comparație Zone — Preț Mediu €/mp + Evoluție</CardTitle></CardHeader>
+            <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">🏘️ Comparație Zone — Preț Mediu €/mp + Evoluție</CardTitle></CardHeader>
             <CardContent className="p-4 overflow-x-auto">
               <div className="flex items-end gap-2.5 h-[160px] min-w-[500px]">
                 {[...ZONES].sort((a, b) => b.pret - a.pret).slice(0, 8).map(z => {
@@ -592,10 +592,10 @@ export default function Analytics() {
                   const chg = (0.04 + Math.random() * 0.1).toFixed(1);
                   return (
                     <div key={z.name} className="flex-1 flex flex-col items-center gap-1 cursor-pointer" onClick={() => toast.info(`${z.name}: €${z.pret}/mp`)}>
-                      <span className="font-['Syne'] text-[10px] font-bold" style={{ color: z.color }}>+{chg}%</span>
+                      <span className="text-[10px] font-bold" style={{ color: z.color }}>+{chg}%</span>
                       <div className="w-full rounded-t-[5px] border hover:opacity-70 transition-opacity flex items-start justify-center pt-1"
                         style={{ height: `${h}px`, background: `${z.color}40`, borderColor: `${z.color}60` }}>
-                        <span className="font-['Syne'] text-[9px] font-bold" style={{ color: z.color }}>€{z.pret}</span>
+                        <span className="text-[10px] font-bold" style={{ color: z.color }}>€{z.pret}</span>
                       </div>
                     </div>
                   );
@@ -603,7 +603,7 @@ export default function Analytics() {
               </div>
               <div className="flex gap-2.5 mt-1.5 min-w-[500px]">
                 {[...ZONES].sort((a, b) => b.pret - a.pret).slice(0, 8).map(z => (
-                  <div key={z.name} className="flex-1 text-center text-[9.5px] text-dim truncate">{z.name}</div>
+                  <div key={z.name} className="flex-1 text-center text-[10px] text-dim truncate">{z.name}</div>
                 ))}
               </div>
             </CardContent>
@@ -615,7 +615,7 @@ export default function Analytics() {
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">📋 Rapoarte Disponibile</CardTitle>
+                <CardTitle className="text-sm font-semibold">📋 Rapoarte Disponibile</CardTitle>
                 <Button size="sm" className="text-xs" onClick={() => toast.success("✨ Raport custom nou creat")}><Plus className="w-3 h-3" />Raport Custom</Button>
               </CardHeader>
               <CardContent className="p-0">
@@ -625,7 +625,7 @@ export default function Analytics() {
                     <span className="text-xl w-8 text-center">{r.icon}</span>
                     <div className="flex-1">
                       <p className="text-[13px] font-semibold">{r.name}</p>
-                      <p className="text-[11.5px] text-dim">{r.desc}</p>
+                      <p className="text-xs text-dim">{r.desc}</p>
                     </div>
                     <Badge className="bg-gold-dim text-gold border-0 text-[11px]">{r.format}</Badge>
                     <Button variant="outline" size="sm" className="text-xs" onClick={e => { e.stopPropagation(); genReport(r.name); }}
@@ -639,7 +639,7 @@ export default function Analytics() {
 
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">⏰ Rapoarte Programate</CardTitle>
+                <CardTitle className="text-sm font-semibold">⏰ Rapoarte Programate</CardTitle>
                 <Button variant="outline" size="sm" className="text-xs" onClick={() => toast.success("➕ Programare adăugată")}><Plus className="w-3 h-3" />Adaugă</Button>
               </CardHeader>
               <CardContent className="p-0">
@@ -647,7 +647,7 @@ export default function Analytics() {
                   <div key={s.name} className="flex items-center gap-3 px-4 py-3 border-b border-subtle/30 last:border-b-0">
                     <div className="flex-1">
                       <p className="text-[13px] font-semibold">{s.name}</p>
-                      <p className="text-[11.5px] text-dim">📅 {s.freq} • Următor: {s.next}</p>
+                      <p className="text-xs text-dim">📅 {s.freq} • Următor: {s.next}</p>
                     </div>
                     <div className={`w-2 h-2 rounded-full ${s.active ? "bg-[hsl(var(--teal))]" : "bg-[hsl(var(--text3))]"}`} />
                     <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info("✏️ Configurare programare")}><Edit className="w-3.5 h-3.5" /></Button>
@@ -658,17 +658,17 @@ export default function Analytics() {
           </div>
 
           <Card>
-            <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📜 Istoric Rapoarte Generate</CardTitle></CardHeader>
+            <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📜 Istoric Rapoarte Generate</CardTitle></CardHeader>
             <CardContent className="p-0 overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-[10.5px]">Raport</TableHead>
-                    <TableHead className="text-[10.5px]">Perioadă</TableHead>
-                    <TableHead className="text-[10.5px]">Generat de</TableHead>
-                    <TableHead className="text-[10.5px]">Dată</TableHead>
-                    <TableHead className="text-[10.5px]">Format</TableHead>
-                    <TableHead className="text-[10.5px]">Acțiuni</TableHead>
+                    <TableHead className="text-[11px]">Raport</TableHead>
+                    <TableHead className="text-[11px]">Perioadă</TableHead>
+                    <TableHead className="text-[11px]">Generat de</TableHead>
+                    <TableHead className="text-[11px]">Dată</TableHead>
+                    <TableHead className="text-[11px]">Format</TableHead>
+                    <TableHead className="text-[11px]">Acțiuni</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

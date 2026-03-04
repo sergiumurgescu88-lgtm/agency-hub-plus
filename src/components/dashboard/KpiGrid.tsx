@@ -49,9 +49,9 @@ export function KpiGrid() {
           className="bg-surface border border-subtle rounded-xl p-4 md:p-5 relative overflow-hidden hover:border-subtle2 transition-colors"
         >
           <div className="absolute top-3 md:top-[18px] right-3 md:right-[18px] text-[20px] md:text-[22px] opacity-20">{kpi.icon}</div>
-          <div className="text-[10px] md:text-[11px] text-dim2 tracking-[1.5px] uppercase mb-2">{kpi.label}</div>
-          <div className="font-serif text-[24px] md:text-[32px] leading-none mb-1.5 md:mb-2">{kpi.value}</div>
-          <div className={`text-[11px] md:text-xs flex items-center gap-1 ${kpi.up ? "text-teal" : "text-danger"}`}>
+          <div className="text-[11px] md:text-xs text-dim2 tracking-[1.5px] uppercase mb-2">{kpi.label}</div>
+          <div className="text-[24px] md:text-[32px] font-bold leading-none mb-1.5 md:mb-2">{kpi.value}</div>
+          <div className={`text-xs md:text-sm flex items-center gap-1 ${kpi.up ? "text-teal" : "text-danger"}`}>
             {kpi.delta}
           </div>
           <div className={`absolute bottom-0 left-0 right-0 h-[2px] ${gradientMap[kpi.accent]}`} />
