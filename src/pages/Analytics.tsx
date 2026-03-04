@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -201,7 +202,8 @@ export default function Analytics() {
   const medals = ["🥇", "🥈", "🥉"];
 
   return (
-    <div className="space-y-5 animate-fade-up">
+    <DashboardLayout>
+    <div className="space-y-5 animate-fade-up p-4 md:p-7">
       {/* HEADER */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
@@ -698,5 +700,6 @@ export default function Analytics() {
         </TabsContent>
       </Tabs>
     </div>
+    </DashboardLayout>
   );
 }

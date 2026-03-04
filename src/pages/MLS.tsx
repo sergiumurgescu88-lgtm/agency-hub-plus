@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -186,7 +187,8 @@ export default function MLS() {
   ];
 
   return (
-    <div className="space-y-5 animate-fade-up">
+    <DashboardLayout>
+    <div className="space-y-5 animate-fade-up p-4 md:p-7">
       {/* MLS EXPLANATION */}
       <Card className="border-[hsl(var(--gold)/0.2)] bg-gold-dim/30">
         <CardContent className="p-4 flex items-start gap-3">
@@ -492,5 +494,6 @@ export default function MLS() {
         </DialogContent>
       </Dialog>
     </div>
+    </DashboardLayout>
   );
 }
