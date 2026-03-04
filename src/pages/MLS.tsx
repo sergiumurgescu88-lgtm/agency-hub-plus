@@ -85,9 +85,9 @@ function StatCard({ label, value, sub, colorClass }: { label: string; value: str
     <Card className="relative overflow-hidden hover:border-[hsl(var(--gold)/0.25)] transition-all hover:-translate-y-0.5">
       <div className={`absolute top-0 left-0 right-0 h-0.5 ${borderColors[colorClass] || "gradient-gold-bottom"}`} />
       <CardContent className="p-5">
-        <p className="text-[10px] font-semibold tracking-wider uppercase text-dim mb-1.5">{label}</p>
-        <p className="font-['Syne'] text-[26px] font-extrabold leading-none">{value}</p>
-        <p className="text-[11px] text-dim mt-1.5">{sub}</p>
+        <p className="text-[11px] font-semibold tracking-wider uppercase text-dim mb-1.5">{label}</p>
+        <p className="text-[26px] font-extrabold leading-none">{value}</p>
+        <p className="text-xs text-dim mt-1.5">{sub}</p>
       </CardContent>
     </Card>
   );
@@ -105,17 +105,17 @@ function AgencyCard({ ag, onConnect }: { ag: Agency; onConnect: (id: number) => 
       onClick={() => ag.status === "connected" && toast.info(`🏢 Profil ${ag.name} — ${ag.props} proprietăți, ${ag.deals} tranzacții co-broker`)}>
       <CardContent className="p-[18px]">
         <div className="flex items-start justify-between mb-2.5">
-          <div className="w-11 h-11 rounded-[10px] flex items-center justify-center font-['Syne'] font-extrabold text-sm border"
+          <div className="w-11 h-11 rounded-[10px] flex items-center justify-center font-extrabold text-sm border"
             style={{ color: ag.color, background: `${ag.color}20`, borderColor: `${ag.color}30` }}>{ag.initials}</div>
           {statusBadge}
         </div>
-        <p className="font-['Syne'] text-sm font-bold mb-1">{ag.name}</p>
+        <p className="text-sm font-bold mb-1">{ag.name}</p>
         <p className="text-xs text-dim mb-2.5 flex items-center gap-1"><MapPin className="w-3 h-3" />{ag.city}</p>
         {ag.status !== "pending" ? (
           <div className="flex gap-3 mb-3">
-            <div className="text-center"><p className="font-['Syne'] text-sm font-bold" style={{ color: ag.color }}>{ag.props}</p><p className="text-[10px] text-dim">Proprietăți</p></div>
-            <div className="text-center"><p className="font-['Syne'] text-sm font-bold">{ag.deals}</p><p className="text-[10px] text-dim">Tranzacții</p></div>
-            {ag.rating > 0 && <div className="text-center"><p className="font-['Syne'] text-sm font-bold">⭐{ag.rating}</p><p className="text-[10px] text-dim">Rating</p></div>}
+            <div className="text-center"><p className="text-sm font-bold" style={{ color: ag.color }}>{ag.props}</p><p className="text-[11px] text-dim">Proprietăți</p></div>
+            <div className="text-center"><p className="text-sm font-bold">{ag.deals}</p><p className="text-[11px] text-dim">Tranzacții</p></div>
+            {ag.rating > 0 && <div className="text-center"><p className="text-sm font-bold">⭐{ag.rating}</p><p className="text-[11px] text-dim">Rating</p></div>}
           </div>
         ) : (
           <p className="text-xs text-dim my-3">Invitație trimisă — așteaptă confirmare</p>
@@ -196,7 +196,7 @@ export default function MLS() {
             <Handshake className="w-5 h-5 text-gold" />
           </div>
           <div>
-            <p className="font-['Syne'] font-bold text-sm mb-1">Ce este MLS Partener?</p>
+            <p className="font-bold text-sm mb-1">Ce este MLS Partener?</p>
             <p className="text-xs text-dim leading-relaxed">
               <strong className="text-gold">MLS (Multiple Listing Service)</strong> este un sistem de partajare a proprietăților între agenții imobiliare partenere. 
               Prin MLS, poți colabora cu alte agenții: partajezi proprietăți, împarți comisioanele (co-broking) și extinzi portofoliul disponibil pentru clienții tăi — fără a lista proprietățile individual. 
@@ -209,8 +209,8 @@ export default function MLS() {
       {/* HEADER */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div>
-          <h1 className="font-['Syne'] text-xl font-extrabold flex items-center gap-2">🤝 MLS Partener</h1>
-          <p className="text-xs text-dim mt-1">Colaborează cu agenții partenere — share proprietăți & split comisioane</p>
+          <h1 className="text-xl font-extrabold flex items-center gap-2">🤝 MLS Partener</h1>
+          <p className="text-sm text-dim mt-1">Colaborează cu agenții partenere — share proprietăți & split comisioane</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 bg-surface border border-subtle rounded-lg px-3 h-9 w-64">
@@ -279,7 +279,7 @@ export default function MLS() {
           <Card>
             <CardHeader className="py-3 px-4 border-b border-subtle">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">🏠 Proprietăți Disponibile în Rețeaua MLS</CardTitle>
+                <CardTitle className="text-sm font-semibold">🏠 Proprietăți Disponibile în Rețeaua MLS</CardTitle>
                 <span className="text-xs text-dim">{filteredProps.length} proprietăți • {agencies.filter(a => a.status === "connected").length} agenții</span>
               </div>
             </CardHeader>
@@ -290,10 +290,10 @@ export default function MLS() {
                   <div className="w-[52px] h-10 rounded-md bg-surface2 flex items-center justify-center text-lg flex-shrink-0">{p.type}</div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[13px] font-semibold truncate">{p.title}</p>
-                    <p className="text-[11.5px] text-dim">{p.rooms !== "—" ? `${p.rooms} cam • ` : ""}{p.area} • via <strong>{p.agency}</strong></p>
+                    <p className="text-xs text-dim">{p.rooms !== "—" ? `${p.rooms} cam • ` : ""}{p.area} • via <strong>{p.agency}</strong></p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className="font-['Syne'] text-[13px] font-bold text-gold">{p.price}</p>
+                    <p className="text-[13px] font-bold text-gold">{p.price}</p>
                     <p className="text-[11px] text-dim">Split: {p.split}</p>
                   </div>
                   <Badge className={`text-[11px] border-0 ${p.status === "Disponibil" ? "bg-teal-dim text-teal" : "bg-gold-dim text-gold"}`}>{p.status}</Badge>
@@ -308,7 +308,7 @@ export default function MLS() {
         <TabsContent value="colaborari" className="space-y-4 animate-fade-up">
           <Card>
             <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-              <CardTitle className="text-sm font-['Syne']">💼 Colaborări Active & Istorice</CardTitle>
+              <CardTitle className="text-sm font-semibold">💼 Colaborări Active & Istorice</CardTitle>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" className="text-xs h-8" onClick={() => toast.success("📊 Raport colaborări exportat")}><Download className="w-3.5 h-3.5" />Export</Button>
                 <Button size="sm" className="text-xs h-8" onClick={() => toast.success("✅ Colaborare nouă inițiată")}><Plus className="w-3.5 h-3.5" />Colaborare Nouă</Button>
@@ -318,13 +318,13 @@ export default function MLS() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-[10.5px]">Proprietate</TableHead>
-                    <TableHead className="text-[10.5px]">Partener</TableHead>
-                    <TableHead className="text-[10.5px]">Rol</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Valoare</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Comision</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Status</TableHead>
-                    <TableHead className="text-[10.5px] text-center">Acțiuni</TableHead>
+                    <TableHead className="text-[11px]">Proprietate</TableHead>
+                    <TableHead className="text-[11px]">Partener</TableHead>
+                    <TableHead className="text-[11px]">Rol</TableHead>
+                    <TableHead className="text-[11px] text-center">Valoare</TableHead>
+                    <TableHead className="text-[11px] text-center">Comision</TableHead>
+                    <TableHead className="text-[11px] text-center">Status</TableHead>
+                    <TableHead className="text-[11px] text-center">Acțiuni</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -335,8 +335,8 @@ export default function MLS() {
                       <TableCell>
                         <Badge className={`text-[11px] border-0 ${c.role === "Listing Agent" ? "bg-gold-dim text-gold" : "bg-blue-dim text-info-blue"}`}>{c.role}</Badge>
                       </TableCell>
-                      <TableCell className="text-center font-['Syne'] font-bold text-[13px]">{c.value}</TableCell>
-                      <TableCell className="text-center font-['Syne'] font-bold text-gold text-[13px]">{c.com}</TableCell>
+                      <TableCell className="text-center font-bold text-[13px]">{c.value}</TableCell>
+                      <TableCell className="text-center font-bold text-gold text-[13px]">{c.com}</TableCell>
                       <TableCell className="text-center">
                         <Badge className={`text-[11px] border-0 ${c.status === "active" ? "bg-teal-dim text-teal" : c.status === "pending" ? "bg-gold-dim text-gold" : "bg-surface2 text-dim"}`}>
                           {c.status === "active" ? "Activ" : c.status === "pending" ? "În curs" : "Finalizat"}
@@ -356,13 +356,13 @@ export default function MLS() {
           <div className="grid grid-cols-2 gap-4">
             {/* Perf chart */}
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📈 Performanță Colaborări</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📈 Performanță Colaborări</CardTitle></CardHeader>
               <CardContent className="p-4">
-                <p className="text-[11.5px] text-dim mb-3">Colaborări finalizate pe lună</p>
+                <p className="text-xs text-dim mb-3">Colaborări finalizate pe lună</p>
                 <div className="flex items-end gap-2 h-[100px]">
                   {PERF_MONTHS.map((m, i) => (
                     <div key={m.month} className="flex flex-col items-center gap-1.5 flex-1">
-                      <span className="font-['Syne'] text-[11px] font-bold text-gold">{m.val}</span>
+                      <span className="text-[11px] font-bold text-gold">{m.val}</span>
                       <div className={`w-full rounded-t transition-all cursor-pointer hover:opacity-70 ${i === PERF_MONTHS.length - 1 ? "bg-gradient-to-t from-[hsl(var(--gold))] to-[hsl(var(--gold2))]" : "bg-gold-dim"}`}
                         style={{ height: `${(m.val / maxPerf) * 70 + 10}px` }}
                         onClick={() => toast.info(`${m.month}: ${m.val} colaborări finalizate`)} />
@@ -375,17 +375,17 @@ export default function MLS() {
 
             {/* Top partners */}
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">🏆 Top Parteneri după Comision</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">🏆 Top Parteneri după Comision</CardTitle></CardHeader>
               <CardContent className="p-0">
                 {TOP_PARTNERS.map((p, i) => {
                   const colors = ["text-gold", "text-info-blue", "text-teal", "text-purple"];
                   const bgs = ["bg-gold-dim", "bg-blue-dim", "bg-teal-dim", "bg-purple-dim"];
                   return (
                     <div key={p.name} className="flex items-center gap-3 px-4 py-3 border-b border-subtle/30">
-                      <div className={`w-7 h-7 rounded-[7px] ${bgs[i]} flex items-center justify-center text-xs font-extrabold font-['Syne'] ${colors[i]}`}>{i + 1}</div>
+                      <div className={`w-7 h-7 rounded-[7px] ${bgs[i]} flex items-center justify-center text-xs font-extrabold ${colors[i]}`}>{i + 1}</div>
                       <span className="flex-1 text-[13px] font-medium">{p.name}</span>
                       <span className="text-xs text-dim mr-2.5">{p.deals} deal-uri</span>
-                      <span className="font-['Syne'] text-[13px] font-bold text-gold">{p.value}</span>
+                      <span className="text-[13px] font-bold text-gold">{p.value}</span>
                     </div>
                   );
                 })}
@@ -399,7 +399,7 @@ export default function MLS() {
           <div className="grid grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
-                <CardTitle className="text-sm font-['Syne']">📋 Reguli Implicite Co-broker</CardTitle>
+                <CardTitle className="text-sm font-semibold">📋 Reguli Implicite Co-broker</CardTitle>
                 <Button variant="outline" size="sm" className="text-xs h-8" onClick={() => toast.success("✅ Reguli salvate")}>💾 Salvează</Button>
               </CardHeader>
               <CardContent className="p-0">
@@ -407,7 +407,7 @@ export default function MLS() {
                   <div key={i} className="flex items-center gap-3 px-4 py-3.5 border-b border-subtle/30">
                     <div className={`w-[34px] h-[34px] rounded-lg ${r.bgClass} flex items-center justify-center ${r.colorClass}`}>{r.icon}</div>
                     <span className="flex-1 text-[13px] font-medium">{r.label}</span>
-                    <span className={`font-['Syne'] text-[13px] font-bold ${r.colorClass}`}>{r.value}</span>
+                    <span className={`text-[13px] font-bold ${r.colorClass}`}>{r.value}</span>
                     <div className="flex items-center gap-2 ml-2">
                       <Switch checked={ruleToggles[i]} onCheckedChange={v => { const t = [...ruleToggles]; t[i] = v; setRuleToggles(t); }} />
                       <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toast.info("✏️ Editare regulă activată")}>✏️</Button>
@@ -418,11 +418,11 @@ export default function MLS() {
             </Card>
 
             <Card>
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">🔧 Reguli per Agenție</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">🔧 Reguli per Agenție</CardTitle></CardHeader>
               <CardContent className="p-0">
                 {agencies.filter(a => a.status === "connected").slice(0, 5).map(ag => (
                   <div key={ag.id} className="flex items-center gap-3 px-4 py-3.5 border-b border-subtle/30">
-                    <div className="w-8 h-8 rounded-[7px] flex items-center justify-center text-[11px] font-bold font-['Syne'] border"
+                    <div className="w-8 h-8 rounded-[7px] flex items-center justify-center text-[11px] font-bold border"
                       style={{ color: ag.color, background: `${ag.color}20`, borderColor: `${ag.color}30` }}>{ag.initials}</div>
                     <span className="flex-1 text-[13px] font-medium">{ag.name}</span>
                     <Select defaultValue="50" onValueChange={() => toast.success(`✅ Regulă actualizată pentru ${ag.name}`)}>
@@ -442,7 +442,7 @@ export default function MLS() {
 
             {/* T&C */}
             <Card className="col-span-2">
-              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-['Syne']">📜 Termeni & Condiții MLS</CardTitle></CardHeader>
+              <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📜 Termeni & Condiții MLS</CardTitle></CardHeader>
               <CardContent className="p-5">
                 <div className="bg-surface2 border border-subtle rounded-lg p-4 text-[13px] text-dim leading-relaxed max-h-[180px] overflow-y-auto">
                   <p className="font-semibold text-foreground mb-2.5">Acordul de Co-broking SocietyHUB MLS</p>
@@ -466,7 +466,7 @@ export default function MLS() {
       <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="font-['Syne']">➕ Invită Agenție Parteneră</DialogTitle>
+            <DialogTitle>➕ Invită Agenție Parteneră</DialogTitle>
             <DialogDescription>Trimite o invitație de colaborare în rețeaua MLS</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
