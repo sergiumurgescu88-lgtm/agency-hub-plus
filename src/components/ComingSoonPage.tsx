@@ -30,21 +30,21 @@ export default function ComingSoonPage({ title, subtitle, icon, accentColor = "g
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto space-y-8 animate-fade-up">
+      <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 animate-fade-up p-4 md:p-0">
         {/* Hero */}
         <div className="relative rounded-2xl overflow-hidden border border-subtle bg-surface">
           <div className={`absolute inset-0 bg-gradient-to-br ${accent.gradient} opacity-40`} />
-          <div className="relative flex flex-col md:flex-row items-center gap-6 p-8 md:p-12">
-            <div className="flex-1 space-y-4">
+          <div className="relative flex flex-col md:flex-row items-center gap-4 md:gap-6 p-6 md:p-12">
+            <div className="flex-1 space-y-3 md:space-y-4">
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${accent.bg} ${accent.text} border ${accent.border}`}>
                 <span>ÎN DEZVOLTARE</span>
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-                <span className="text-4xl mr-3">{icon}</span>
+              <h1 className="text-2xl md:text-4xl font-bold text-foreground">
+                <span className="text-3xl md:text-4xl mr-2 md:mr-3">{icon}</span>
                 {title}
               </h1>
-              <p className="text-dim text-base leading-relaxed max-w-md">{subtitle}</p>
-              <div className="flex gap-3 pt-2">
+              <p className="text-dim text-sm md:text-base leading-relaxed max-w-md">{subtitle}</p>
+              <div className="flex flex-col sm:flex-row gap-2 md:gap-3 pt-2">
                 <button
                   onClick={() => navigate("/")}
                   className="px-5 py-2.5 bg-gold text-primary-foreground font-semibold rounded-lg text-sm hover:bg-gold/90 transition-colors"
@@ -59,7 +59,7 @@ export default function ComingSoonPage({ title, subtitle, icon, accentColor = "g
                 </button>
               </div>
             </div>
-            <div className="w-48 md:w-64 flex-shrink-0">
+            <div className="w-36 md:w-64 flex-shrink-0">
               <img src={comingSoonHero} alt="SocietyHUB" className="w-full rounded-xl opacity-90" />
             </div>
           </div>
@@ -68,15 +68,15 @@ export default function ComingSoonPage({ title, subtitle, icon, accentColor = "g
         {/* Features Grid */}
         <div>
           <h2 className="text-lg font-semibold text-foreground mb-4">Ce va include acest modul</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {features.map((f, i) => (
               <div
                 key={i}
-                className={`p-5 rounded-xl bg-surface border border-subtle hover:border-subtle2 transition-all animate-fade-up`}
+                className={`p-4 md:p-5 rounded-xl bg-surface border border-subtle hover:border-subtle2 transition-all animate-fade-up`}
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">{f.icon}</span>
+                  <span className="text-xl md:text-2xl flex-shrink-0">{f.icon}</span>
                   <div>
                     <h3 className="text-sm font-semibold text-foreground mb-1">{f.title}</h3>
                     <p className="text-xs text-dim leading-relaxed">{f.description}</p>

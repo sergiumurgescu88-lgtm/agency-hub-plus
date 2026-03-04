@@ -33,12 +33,12 @@ const columns = [
 export function PipelineCard() {
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden mb-3.5 animate-fade-up-delay-1">
-      <div className="px-5 py-4 flex items-center justify-between border-b border-subtle">
+      <div className="px-4 md:px-5 py-3 md:py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>📋</span> Pipeline Tranzacții
         </div>
         <div className="flex gap-2 items-center">
-          <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-gold-dim text-gold">
+          <span className="hidden sm:inline text-[11px] font-medium px-2 py-0.5 rounded-md bg-gold-dim text-gold">
             Valoare totală: 284.600€
           </span>
           <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
@@ -46,30 +46,32 @@ export function PipelineCard() {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-2.5 p-4 px-5">
-        {columns.map((col) => (
-          <div key={col.name}>
-            <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[11px] font-semibold tracking-wider uppercase text-dim">{col.name}</span>
-              <span className={`text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center ${col.colorClass}`}>
-                {col.count}
-              </span>
-            </div>
-            {col.cards.map((card, i) => (
-              <div
-                key={i}
-                className="bg-surface2 border border-subtle rounded-lg p-[11px] mb-2 cursor-pointer hover:border-subtle2 hover:-translate-y-0.5 transition-all"
-              >
-                <div className="text-[12.5px] font-medium mb-1">{card.name}</div>
-                <div className="text-[11px] text-dim2">{card.meta}</div>
-                <div className="text-xs font-semibold text-gold mt-1.5">{card.price}</div>
-                <span className={`inline-block text-[10px] px-[7px] py-0.5 rounded-md mt-1.5 ${card.tagClass}`}>
-                  {card.tag}
+      <div className="overflow-x-auto">
+        <div className="grid grid-cols-4 gap-2.5 p-4 px-4 md:px-5 min-w-[700px]">
+          {columns.map((col) => (
+            <div key={col.name}>
+              <div className="flex items-center justify-between mb-2.5">
+                <span className="text-[11px] font-semibold tracking-wider uppercase text-dim">{col.name}</span>
+                <span className={`text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center ${col.colorClass}`}>
+                  {col.count}
                 </span>
               </div>
-            ))}
-          </div>
-        ))}
+              {col.cards.map((card, i) => (
+                <div
+                  key={i}
+                  className="bg-surface2 border border-subtle rounded-lg p-[11px] mb-2 cursor-pointer hover:border-subtle2 hover:-translate-y-0.5 transition-all"
+                >
+                  <div className="text-[12.5px] font-medium mb-1">{card.name}</div>
+                  <div className="text-[11px] text-dim2">{card.meta}</div>
+                  <div className="text-xs font-semibold text-gold mt-1.5">{card.price}</div>
+                  <span className={`inline-block text-[10px] px-[7px] py-0.5 rounded-md mt-1.5 ${card.tagClass}`}>
+                    {card.tag}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

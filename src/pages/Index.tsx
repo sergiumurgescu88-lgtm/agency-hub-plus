@@ -18,20 +18,20 @@ const Index = () => {
   return (
     <DashboardLayout>
       <Topbar />
-      <div className="p-7 flex-1">
+      <div className="p-4 md:p-7 flex-1">
         {/* Alert Strip */}
-        <div className="bg-gold-dim border border-gold/20 rounded-xl p-3 px-4 flex items-center gap-3 mb-3.5 animate-fade-up">
+        <div className="bg-gold-dim border border-gold/20 rounded-xl p-3 px-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-3.5 animate-fade-up">
           <span className="text-lg">🤖</span>
           <p className="text-[13px] text-dim flex-1">
             <strong className="text-gold">12 match-uri noi</strong> identificate de AI între cererile active și proprietățile din portofoliu. Potențial comision total: <strong className="text-gold">38.400€</strong>
           </p>
-          <button className="text-xs font-semibold text-gold bg-transparent border border-gold rounded-md px-3 py-[5px] cursor-pointer hover:bg-gold-dim transition-colors">
+          <button className="text-xs font-semibold text-gold bg-transparent border border-gold rounded-md px-3 py-[5px] cursor-pointer hover:bg-gold-dim transition-colors whitespace-nowrap">
             Vezi match-urile →
           </button>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-4 gap-2.5 mb-3.5 animate-fade-up">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3.5 animate-fade-up">
           {[
             { icon: "🏠", label: "Adaugă Proprietate" },
             { icon: "📤", label: "Publică pe Portale" },
@@ -40,10 +40,10 @@ const Index = () => {
           ].map((qa) => (
             <div
               key={qa.label}
-              className="bg-surface border border-subtle rounded-xl p-3.5 flex flex-col items-center gap-2 cursor-pointer hover:border-gold hover:bg-gold-dim transition-all"
+              className="bg-surface border border-subtle rounded-xl p-3 sm:p-3.5 flex flex-col items-center gap-2 cursor-pointer hover:border-gold hover:bg-gold-dim transition-all"
             >
-              <span className="text-[22px]">{qa.icon}</span>
-              <span className="text-xs text-dim font-medium text-center">{qa.label}</span>
+              <span className="text-[20px] sm:text-[22px]">{qa.icon}</span>
+              <span className="text-[11px] sm:text-xs text-dim font-medium text-center">{qa.label}</span>
             </div>
           ))}
         </div>
@@ -52,12 +52,12 @@ const Index = () => {
         <KpiGrid />
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-3.5">
+        <div className="flex gap-1 mb-3.5 overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-[7px] rounded-[7px] text-[13px] font-medium cursor-pointer transition-all border-none ${
+              className={`px-3 md:px-4 py-[7px] rounded-[7px] text-[12px] md:text-[13px] font-medium cursor-pointer transition-all border-none whitespace-nowrap ${
                 activeTab === tab
                   ? "bg-gold-dim text-gold"
                   : "text-dim2 hover:text-dim bg-transparent"
@@ -69,7 +69,7 @@ const Index = () => {
         </div>
 
         {/* Row 1: Properties + Right column */}
-        <div className="grid grid-cols-[1fr_360px] gap-3.5 mb-3.5 animate-fade-up-delay-1">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-3.5 mb-3.5 animate-fade-up-delay-1">
           <PropertiesCard />
           <div className="flex flex-col gap-3.5">
             <PortalsCard />
@@ -81,7 +81,7 @@ const Index = () => {
         <PipelineCard />
 
         {/* Row 3: Leads + Matching + Performance */}
-        <div className="grid grid-cols-3 gap-3.5 animate-fade-up-delay-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 animate-fade-up-delay-2">
           <LeadsCard />
           <MatchingCard />
           <AgentPerformanceCard />

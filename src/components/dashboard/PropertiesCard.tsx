@@ -16,7 +16,7 @@ const thumbBg: Record<string, string> = {
 export function PropertiesCard() {
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
-      <div className="px-5 py-4 flex items-center justify-between border-b border-subtle">
+      <div className="px-4 md:px-5 py-3 md:py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>🏠</span> Proprietăți Recente
         </div>
@@ -24,25 +24,25 @@ export function PropertiesCard() {
           Vezi toate (47) →
         </button>
       </div>
-      <div className="px-5 py-1">
+      <div className="px-4 md:px-5 py-1">
         {properties.map((p, i) => (
           <div
             key={i}
-            className="flex items-center gap-3.5 py-3 border-b border-subtle last:border-b-0 cursor-pointer hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2.5 md:gap-3.5 py-3 border-b border-subtle last:border-b-0 cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <div className={`w-[52px] h-10 rounded-md flex items-center justify-center text-lg bg-gradient-to-br ${thumbBg[p.type]} flex-shrink-0`}>
+            <div className={`w-10 md:w-[52px] h-8 md:h-10 rounded-md flex items-center justify-center text-base md:text-lg bg-gradient-to-br ${thumbBg[p.type]} flex-shrink-0`}>
               {p.emoji}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[13.5px] font-medium truncate">{p.name}</div>
-              <div className="text-[11px] text-dim2 mt-0.5">{p.meta}</div>
+              <div className="text-[12px] md:text-[13.5px] font-medium truncate">{p.name}</div>
+              <div className="text-[10px] md:text-[11px] text-dim2 mt-0.5 truncate">{p.meta}</div>
             </div>
-            <span className={`text-[10px] font-semibold px-2.5 py-[3px] rounded-full tracking-wide uppercase whitespace-nowrap ${p.statusClass}`}>
+            <span className={`text-[9px] md:text-[10px] font-semibold px-2 md:px-2.5 py-[3px] rounded-full tracking-wide uppercase whitespace-nowrap ${p.statusClass} hidden sm:inline`}>
               {p.status}
             </span>
-            <div className="text-right">
-              <div className="text-[13px] font-semibold">{p.price}</div>
-              <div className="text-[10px] text-dim2">{p.priceType}</div>
+            <div className="text-right flex-shrink-0">
+              <div className="text-[12px] md:text-[13px] font-semibold">{p.price}</div>
+              <div className="text-[9px] md:text-[10px] text-dim2">{p.priceType}</div>
             </div>
           </div>
         ))}

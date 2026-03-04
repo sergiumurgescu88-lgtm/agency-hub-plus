@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const navSections = [
@@ -50,12 +49,21 @@ const badgeColorMap: Record<string, string> = {
   gold: "bg-gold text-primary-foreground",
 };
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  onNavigate?: () => void;
+}
+
+export function AppSidebar({ onNavigate }: AppSidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleNav = (path: string) => {
+    navigate(path);
+    onNavigate?.();
+  };
+
   return (
-    <aside className="w-[230px] bg-surface border-r border-subtle fixed top-0 left-0 bottom-0 z-50 flex flex-col">
+    <aside className="w-full md:w-[230px] bg-surface md:border-r border-subtle md:fixed md:top-0 md:left-0 md:bottom-0 z-50 flex flex-col h-full">
       {/* Logo */}
       <div className="px-5 py-[22px] border-b border-subtle mb-2">
         <div className="font-serif text-[22px] tracking-tight">
@@ -78,7 +86,7 @@ export function AppSidebar() {
               return (
                 <div
                   key={item.title}
-                  onClick={() => navigate(item.path)}
+                  onClick={() => handleNav(item.path)}
                   className={`flex items-center gap-2.5 py-[9px] px-3 mx-2 rounded-lg cursor-pointer text-[13.5px] transition-all relative
                     ${isActive ? "bg-gold-dim text-gold" : "text-dim hover:bg-surface2 hover:text-foreground"}`}
                 >
