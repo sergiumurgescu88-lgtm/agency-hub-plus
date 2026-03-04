@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { AppSidebar } from "./AppSidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -6,11 +6,20 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 export function DashboardLayout({ children }: { children: ReactNode }) {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem("sidebar-collapsed");
+    return saved === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-collapsed", String(collapsed));
+  }, [collapsed]);
+
+  const sidebarWidth = collapsed ? 60 : 230;
 
   if (isMobile) {
     return (
       <div className="flex flex-col min-h-screen">
-        {/* Mobile hamburger header */}
         <div className="bg-surface border-b border-subtle h-[52px] flex items-center px-4 sticky top-0 z-50">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -42,8 +51,11 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen">
-      <AppSidebar />
-      <main className="ml-[230px] flex-1 flex flex-col min-h-screen">
+      <AppSidebar collapsed={collapsed} onToggleCollapse={() => setCollapsed(!collapsed)} />
+      <main
+        className="flex-1 flex flex-col min-h-screen transition-all duration-300"
+        style={{ marginLeft: sidebarWidth }}
+      >
         {children}
       </main>
     </div>
