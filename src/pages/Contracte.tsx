@@ -186,16 +186,16 @@ export default function Contracte() {
   return (
     <DashboardLayout>
       {/* Topbar */}
-      <div className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl border-b border-subtle px-4 md:px-7 h-[60px] flex items-center gap-3">
-        <div className="flex items-center gap-1.5 text-[13px] text-dim">
+      <div className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl border-b border-subtle px-4 md:px-7 h-[52px] md:h-[60px] flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-1.5 text-[12px] md:text-[13px] text-dim">
           <span className="hover:text-gold cursor-pointer transition-colors">SocietyHUB</span>
           <span className="text-dim2">›</span>
           <span className="text-foreground font-medium">📝 Contracte</span>
         </div>
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-xs gap-1.5" onClick={() => setTab("templates")}>📄 Template-uri</Button>
-          <Button variant="outline" size="sm" className="text-xs gap-1.5" onClick={() => toast.success("📤 Export CSV — " + data.length + " contracte")}>📤 Export</Button>
-          <Button size="sm" className="text-xs gap-1.5 bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground font-bold hover:opacity-90" onClick={() => setNewOpen(true)}>＋ Contract Nou</Button>
+        <div className="ml-auto flex items-center gap-1.5 md:gap-2">
+          <Button variant="outline" size="sm" className="text-xs gap-1.5 hidden md:inline-flex" onClick={() => setTab("templates")}>📄 Template-uri</Button>
+          <Button variant="outline" size="sm" className="text-xs gap-1.5 hidden md:inline-flex" onClick={() => toast.success("📤 Export CSV — " + data.length + " contracte")}>📤 Export</Button>
+          <Button size="sm" className="text-[11px] md:text-xs gap-1.5 bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground font-bold hover:opacity-90" onClick={() => setNewOpen(true)}>＋ <span className="hidden sm:inline">Contract </span>Nou</Button>
         </div>
       </div>
 
@@ -229,10 +229,10 @@ export default function Contracte() {
 
         {/* Tabs + Search */}
         <div className="flex flex-col md:flex-row items-start md:items-center gap-3 animate-fade-up-delay-1">
-          <div className="flex gap-0.5 bg-surface border border-subtle rounded-[10px] p-1">
+          <div className="flex gap-0.5 bg-surface border border-subtle rounded-[10px] p-1 overflow-x-auto w-full md:w-auto">
             {TABS.map(t => (
               <button key={t.key} onClick={() => setTab(t.key)}
-                className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${tab === t.key ? "bg-surface2 text-foreground shadow-sm" : "text-dim hover:text-foreground"}`}>
+                className={`px-3 md:px-4 py-2 rounded-lg text-[12px] md:text-[13px] font-medium transition-all whitespace-nowrap ${tab === t.key ? "bg-surface2 text-foreground shadow-sm" : "text-dim hover:text-foreground"}`}>
                 {t.icon} {t.label}
               </button>
             ))}
