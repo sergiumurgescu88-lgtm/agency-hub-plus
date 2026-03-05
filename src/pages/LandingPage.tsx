@@ -58,13 +58,10 @@ const compRows = [
 ];
 
 const teamMembers = [
-  { initials: "D", name: "Dumitru Sîrbu", role: "CEO & Fondator" },
-  { initials: "F", name: "Felix Kerekes", role: "CTO" },
-  { initials: "C", name: "Cătălin Pintea", role: "Product Manager" },
-  { initials: "C", name: "Ciprian Baciu", role: "Quality Assurance" },
-  { initials: "I", name: "Iulian Gavriluță", role: "Sales Consulting Partner" },
-  { initials: "R", name: "Radu Șerfezeu", role: "Sales Consulting Partner" },
-  { initials: "V", name: "Vlad Cojocaru", role: "Customer Support" },
+  { initials: "S", name: "Sergiu Murgescu", role: "CEO & Fondator" },
+  { initials: "A", name: "Andrei Bunea", role: "CTO" },
+  { initials: "M", name: "Mihnea Enache", role: "Product Manager" },
+  { initials: "M", name: "Marius Viziru", role: "Sales Consulting Partner" },
 ];
 
 /* ─── STYLES (matching the HTML CSS) ─── */
