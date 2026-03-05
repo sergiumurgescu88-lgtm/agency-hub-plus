@@ -82,6 +82,11 @@
 }
 
 @layer utilities {
+  .lp-wrap { max-width: 1300px; margin: 0 auto; padding: 0 1rem; }
+  .lp-section { padding: 3rem 0; }
+  .lp-section-slim { padding: 2rem 0; }
+  .lp-hero { padding: 4rem 0 2rem; }
+
   .font-serif-display {
     font-family: 'Instrument Serif', serif;
   }
@@ -128,6 +133,13 @@
   .gradient-red-bottom {
     background: linear-gradient(90deg, hsl(var(--red)), transparent);
   }
+}
+
+@media (min-width: 768px) {
+  .lp-wrap { padding: 0 2rem; }
+  .lp-section { padding: 6rem 0; }
+  .lp-section-slim { padding: 4rem 0; }
+  .lp-hero { padding: 5.5rem 0 3.5rem; }
 }
 
 /* ── LANDING PAGE ANIMATIONS ── */
