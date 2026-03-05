@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 /* ─── PAGE KEYS ─── */
-type PageKey = "home" | "func" | "site" | "pret" | "despre" | "contact" | "auth" | "signup";
+type PageKey = "home" | "func" | "site" | "pret" | "despre" | "contact" | "auth" | "signup" | "termeni";
 
 const NAV_ITEMS: { key: PageKey; label: string }[] = [
   { key: "func", label: "Funcționalități" },
@@ -90,6 +90,7 @@ const LandingPage = () => {
   const [mobOpen, setMobOpen] = useState(false);
   const [annual, setAnnual] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(1);
+  const [cookieAccepted, setCookieAccepted] = useState(() => localStorage.getItem("cookie_accepted") === "true");
 
   const nav = (key: PageKey) => {
     setPage(key);
@@ -143,9 +144,12 @@ const LandingPage = () => {
     <footer style={{ background: s.dark2, borderTop: `1px solid ${s.subtleBorder}`, padding: "2rem 0" }}>
       <div className="wrap" style={{ maxWidth: 1300, margin: "0 auto", padding: "0 2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-          <p style={{ fontSize: "0.8rem", color: s.text3 }}>© 2026 SocietyHUB. Toate drepturile rezervate.</p>
+          <div>
+            <p style={{ fontSize: "0.8rem", color: s.text3 }}>© 2026 SocietyHUB. Toate drepturile rezervate.</p>
+            <p style={{ fontSize: "0.7rem", color: s.text3, marginTop: "0.3rem" }}>MURSE ADVERTISING S.R.L. · CUI: 44923890 · J40/16148/2021</p>
+          </div>
           <div style={{ display: "flex", gap: "1.5rem" }}>
-            <a style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Termeni</a>
+            <a onClick={() => nav("termeni")} style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Termeni</a>
             <a onClick={() => nav("contact")} style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Contact</a>
           </div>
         </div>
@@ -180,6 +184,7 @@ const LandingPage = () => {
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "3.5rem" }}>
               <BtnPrimary onClick={() => nav("signup")}>Accesează CRM-ul →</BtnPrimary>
+              <BtnSecondary onClick={() => navigate("/dashboard")}>🖥️ Demo Dashboard</BtnSecondary>
               <BtnSecondary onClick={() => nav("func")}>Descoperă funcționalitățile</BtnSecondary>
             </div>
             <div className="flex flex-wrap gap-6 md:gap-14">
@@ -438,8 +443,8 @@ const LandingPage = () => {
               <h4 style={{ fontSize: "0.76rem", fontWeight: 600, color: s.text2, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "1.2rem" }}>Companie</h4>
               <a onClick={() => nav("despre")} style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem", cursor: "pointer" }}>Despre Noi</a>
               <a onClick={() => nav("contact")} style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem", cursor: "pointer" }}>Contact</a>
-              <a style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>Termeni și condiții</a>
-              <a style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>Confidențialitate</a>
+              <a onClick={() => nav("termeni")} style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem", cursor: "pointer" }}>Termeni și condiții</a>
+              <a onClick={() => nav("termeni")} style={{ display: "block", fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem", cursor: "pointer" }}>Confidențialitate</a>
             </div>
             <div>
               <h4 style={{ fontSize: "0.76rem", fontWeight: 600, color: s.text2, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "1.2rem" }}>Contact</h4>
@@ -447,13 +452,17 @@ const LandingPage = () => {
               <p style={{ fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>📞 0730 765 131</p>
               <p style={{ fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>✉️ contact@societyhub.ro</p>
               <p style={{ fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>🕐 L–V: 09:00 – 18:00</p>
+              <p style={{ fontSize: "0.855rem", color: s.text3, marginBottom: "0.55rem" }}>📍 București, România</p>
             </div>
           </div>
           <div style={{ borderTop: `1px solid ${s.subtleBorder}`, paddingTop: "2rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-            <p style={{ fontSize: "0.8rem", color: s.text3 }}>© 2026 SocietyHUB — CRM Imobiliar Pro. Toate drepturile rezervate.</p>
+            <div>
+              <p style={{ fontSize: "0.8rem", color: s.text3 }}>© 2026 SocietyHUB — CRM Imobiliar Pro. Toate drepturile rezervate.</p>
+              <p style={{ fontSize: "0.72rem", color: s.text3, marginTop: "0.4rem" }}>MURSE ADVERTISING S.R.L. · CUI: 44923890 · J40/16148/2021 · Înregistrată la 17.09.2021</p>
+            </div>
             <div style={{ display: "flex", gap: "1.5rem" }}>
-              <a style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Termeni</a>
-              <a style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Confidențialitate</a>
+              <a onClick={() => nav("termeni")} style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Termeni</a>
+              <a onClick={() => nav("termeni")} style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Confidențialitate</a>
               <a onClick={() => nav("contact")} style={{ fontSize: "0.8rem", color: s.text3, cursor: "pointer" }}>Contact</a>
             </div>
           </div>
@@ -736,7 +745,8 @@ const LandingPage = () => {
               </div>
               <div style={{ padding: "1.75rem", background: s.surface, border: `1px solid ${s.subtleBorder}`, borderRadius: s.radius }}>
                 <div style={{ fontSize: "0.74rem", color: s.gold, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "1rem" }}>📍 Biroul Nostru</div>
-                <div className="flex items-start gap-2.5" style={{ fontSize: "0.89rem", color: s.text2 }}><span style={{ color: s.gold, width: 22 }}>🏢</span><span>Bulevardul 21 Decembrie 1989, Nr. 70<br />Cluj-Napoca, Cluj</span></div>
+                <div className="flex items-start gap-2.5" style={{ fontSize: "0.89rem", color: s.text2 }}><span style={{ color: s.gold, width: 22 }}>🏢</span><span>București, România</span></div>
+                <div className="flex items-start gap-2.5 mt-3" style={{ fontSize: "0.78rem", color: s.text3 }}><span style={{ color: s.gold, width: 22 }}>📄</span><span>MURSE ADVERTISING S.R.L.<br />CUI: 44923890<br />Nr. Înmatriculare: J40/16148/2021<br />Data înființării: 17.09.2021</span></div>
               </div>
             </div>
             <div style={{ padding: "2.5rem", background: s.surface, border: `1px solid ${s.subtleBorder}`, borderRadius: s.radius }}>
@@ -814,6 +824,85 @@ const LandingPage = () => {
     </div>
   );
 
+  const renderTermeni = () => (
+    <>
+      <div style={{ ...pageHero, paddingTop: "5.5rem" }}>
+        <div style={wrap}>
+          <Tag>Legal</Tag>
+          <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontWeight: 900, lineHeight: 1.06, marginTop: "0.25rem" }}>
+            Termeni și <i style={{ color: s.gold }}>Condiții</i>
+          </h1>
+        </div>
+      </div>
+      <section style={sectionPad}>
+        <div style={{ ...wrap, maxWidth: 800 }}>
+          <div style={{ background: s.surface, border: `1px solid ${s.subtleBorder}`, borderRadius: s.radius, padding: "2.5rem" }}>
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>1. Informații despre operator</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Platforma SocietyHUB este operată de <strong style={{ color: s.text }}>MURSE ADVERTISING S.R.L.</strong>, societate comercială înregistrată în România.<br /><br />
+              • Cod Unic de Înregistrare (CUI): <strong style={{ color: s.text }}>44923890</strong><br />
+              • Număr de înmatriculare: <strong style={{ color: s.text }}>J40/16148/2021</strong><br />
+              • EUID: ROONRC.J40/16148/2021<br />
+              • Data înființării: <strong style={{ color: s.text }}>17 septembrie 2021</strong><br />
+              • Sediu: București, România<br />
+              • Email: contact@societyhub.ro
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>2. Acceptarea termenilor</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Prin accesarea și utilizarea platformei SocietyHUB, acceptați în mod expres acești Termeni și Condiții. Dacă nu sunteți de acord cu oricare dintre prevederile de mai jos, vă rugăm să nu utilizați platforma.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>3. Descrierea serviciilor</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              SocietyHUB este o platformă CRM destinată profesioniștilor din domeniul imobiliar, oferind funcționalități precum: gestionarea proprietăților, a clienților și a tranzacțiilor, publicare pe portaluri imobiliare, generare de contracte, campanii de marketing, analytics și colaborare MLS.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>4. Contul de utilizator</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Utilizatorii sunt responsabili pentru confidențialitatea credențialelor de acces. Orice activitate desfășurată prin contul dumneavoastră este responsabilitatea dumneavoastră. Vă obligați să furnizați informații corecte și actualizate la înregistrare.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>5. Politica de confidențialitate și cookie-uri</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Colectăm și procesăm date personale în conformitate cu Regulamentul (UE) 2016/679 (GDPR). Datele sunt utilizate exclusiv pentru furnizarea și îmbunătățirea serviciilor noastre.<br /><br />
+              <strong style={{ color: s.text }}>Cookie-uri utilizate:</strong><br />
+              • <strong style={{ color: s.text }}>Cookie-uri esențiale</strong> — necesare pentru funcționarea platformei<br />
+              • <strong style={{ color: s.text }}>Cookie-uri analitice</strong> — pentru înțelegerea modului de utilizare a platformei<br />
+              • <strong style={{ color: s.text }}>Cookie-uri de marketing</strong> — pentru personalizarea experienței și a comunicărilor<br /><br />
+              Puteți gestiona preferințele cookie-urilor din setările browserului dumneavoastră.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>6. Proprietate intelectuală</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Toate drepturile de proprietate intelectuală asupra platformei SocietyHUB, inclusiv designul, codul sursă, conținutul și marca, aparțin MURSE ADVERTISING S.R.L. Este interzisă reproducerea, distribuirea sau modificarea fără acord scris.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>7. Plăți și facturare</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Prețurile afișate sunt exprimate în EUR, fără TVA. Facturarea se realizează lunar sau anual, conform planului ales. Anularea abonamentului poate fi efectuată oricând din contul de utilizator.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>8. Limitarea răspunderii</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              MURSE ADVERTISING S.R.L. nu va fi responsabilă pentru daune indirecte, pierderi de date sau întreruperi ale serviciului cauzate de factori externi. Depunem eforturi rezonabile pentru a asigura disponibilitatea și securitatea platformei.
+            </p>
+
+            <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.5rem", fontWeight: 700, marginBottom: "1.5rem" }}>9. Legea aplicabilă</h2>
+            <p style={{ fontSize: "0.9rem", color: s.text2, lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              Acești Termeni și Condiții sunt guvernați de legislația din România. Orice litigiu va fi soluționat de instanțele competente din București.
+            </p>
+
+            <div style={{ borderTop: `1px solid ${s.subtleBorder}`, paddingTop: "1.5rem", marginTop: "1rem" }}>
+              <p style={{ fontSize: "0.8rem", color: s.text3 }}>Ultima actualizare: Martie 2026</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <SmallFooter />
+    </>
+  );
+
   const pages: Record<PageKey, () => JSX.Element> = {
     home: renderHome,
     func: renderFunc,
@@ -823,6 +912,7 @@ const LandingPage = () => {
     contact: renderContact,
     auth: renderAuth,
     signup: renderSignup,
+    termeni: renderTermeni,
   };
 
   return (
@@ -863,6 +953,22 @@ const LandingPage = () => {
       <div style={{ minHeight: "calc(100vh - 68px)", paddingTop: page === "home" ? 0 : 0 }}>
         {pages[page]()}
       </div>
+
+      {/* COOKIE CONSENT BANNER */}
+      {!cookieAccepted && (
+        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 1001, background: "rgba(9,9,14,0.97)", backdropFilter: "blur(16px)", borderTop: `1px solid ${s.goldBorder}`, padding: "1.25rem 2rem" }}>
+          <div style={{ maxWidth: 1300, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+            <p style={{ fontSize: "0.84rem", color: s.text2, flex: 1, minWidth: 280, lineHeight: 1.6 }}>
+              🍪 Folosim cookie-uri pentru a îmbunătăți experiența ta pe platformă. Prin continuarea navigării, ești de acord cu{" "}
+              <span onClick={() => nav("termeni")} style={{ color: s.gold, cursor: "pointer", textDecoration: "underline" }}>Politica de Cookie-uri și Termenii și Condițiile</span> noastre.
+            </p>
+            <div style={{ display: "flex", gap: "0.75rem", flexShrink: 0 }}>
+              <button onClick={() => { setCookieAccepted(true); localStorage.setItem("cookie_accepted", "true"); }} style={{ padding: "0.6rem 1.5rem", borderRadius: 8, fontSize: "0.84rem", fontWeight: 600, cursor: "pointer", border: "none", background: `linear-gradient(135deg,${s.gold},${s.goldLight})`, color: s.dark, fontFamily: "'DM Sans',sans-serif" }}>Accept toate</button>
+              <button onClick={() => { setCookieAccepted(true); localStorage.setItem("cookie_accepted", "true"); }} style={{ padding: "0.6rem 1.5rem", borderRadius: 8, fontSize: "0.84rem", fontWeight: 600, cursor: "pointer", background: "transparent", border: `1px solid rgba(255,255,255,0.12)`, color: s.text2, fontFamily: "'DM Sans',sans-serif" }}>Doar esențiale</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
