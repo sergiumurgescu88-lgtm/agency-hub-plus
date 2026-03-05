@@ -15,17 +15,17 @@ const NAV_ITEMS: { key: PageKey; label: string }[] = [
 /* ─── DATA ─── */
 const modules = [
   { icon: "🏠", title: "Proprietăți", desc: "Gestionează portofoliul complet — apartamente, case, terenuri și spații comerciale, totul într-un singur loc.", chips: ["Galerie Foto & Video", "Localizare pe Hartă"] },
-  { icon: "👥", title: "Clienți & Leads", desc: "Centralizează toți clienții și lead-urile cu scoring automat și segmentare avansată.", chips: ["Lead Scoring AI", "Istoric Interacțiuni"], badge: "În dezvoltare" },
-  { icon: "📋", title: "Pipeline Tranzacții", desc: "Vizualizare Kanban completă a tranzacțiilor în curs, de la lead nou până la contract semnat.", chips: ["Board Kanban", "Timere & Deadline-uri"], badge: "În dezvoltare" },
-  { icon: "🎯", title: "Matching AI", desc: "Motor inteligent de potrivire între proprietăți și cerințele clienților, cu sugestii automate.", chips: ["Algoritm AI de Potrivire", "Notificări Automate"], badge: "În dezvoltare" },
-  { icon: "📤", title: "Portale Imobiliare", desc: "Publică simultan pe 8–10 platforme: OLX, Storia, Imobiliare.ro, Publi24 și altele, dintr-un singur click.", chips: ["Sincronizare Automată", "Statistici per Portal"], badge: "În dezvoltare" },
-  { icon: "🌐", title: "Site Agenție", desc: "Website profesional generat automat cu listing-urile tale, pagini de agent și formulare integrate.", chips: ["Template-uri Premium", "Listing-uri Live"], badge: "În dezvoltare" },
-  { icon: "📱", title: "Campanii WA/Email", desc: "Trimite campanii targetate pe WhatsApp și Email către clienți segmentați, cu template-uri profesionale.", chips: ["WhatsApp Business API", "Email Marketing"], badge: "În dezvoltare" },
-  { icon: "📝", title: "Contracte", desc: "Generează, semnează și arhivează contracte digitale — de intermediere, pre-contracte și acte adiționale.", chips: ["Template-uri Contract", "Semnătură Electronică"], badge: "În dezvoltare" },
-  { icon: "📅", title: "Vizionări", desc: "Programează, gestionează și urmărești toate vizionările cu calendar integrat și feedback automat.", chips: ["Calendar Inteligent", "Checklist Vizionare"], badge: "În dezvoltare" },
-  { icon: "💰", title: "Comisioane", desc: "Tracking complet al comisioanelor — calculate, facturate și încasate, cu split automat între agenți.", chips: ["Calcul Automat", "Dashboard Financiar"], badge: "În dezvoltare" },
-  { icon: "📊", title: "Analytics", desc: "Rapoarte detaliate și insight-uri despre performanța agenției, agenților și a pieței imobiliare.", chips: ["Grafice Interactive", "Leaderboard Agenți"], badge: "În dezvoltare" },
-  { icon: "🤝", title: "MLS Partener", desc: "Colaborează cu alte agenții prin sistemul MLS — share proprietăți, split comisioane și extinde portofoliul.", chips: ["Rețea de Agenții", "Reguli de Colaborare"], badge: "În dezvoltare" },
+  { icon: "👥", title: "Clienți & Leads", desc: "Centralizează toți clienții și lead-urile cu scoring automat și segmentare avansată.", chips: ["Lead Scoring AI", "Istoric Interacțiuni"] },
+  { icon: "📋", title: "Pipeline Tranzacții", desc: "Vizualizare Kanban completă a tranzacțiilor în curs, de la lead nou până la contract semnat.", chips: ["Board Kanban", "Timere & Deadline-uri"] },
+  { icon: "🎯", title: "Matching AI", desc: "Motor inteligent de potrivire între proprietăți și cerințele clienților, cu sugestii automate.", chips: ["Algoritm AI de Potrivire", "Notificări Automate"] },
+  { icon: "📤", title: "Portale Imobiliare", desc: "Publică simultan pe 8–10 platforme: OLX, Storia, Imobiliare.ro, Publi24 și altele, dintr-un singur click.", chips: ["Sincronizare Automată", "Statistici per Portal"] },
+  { icon: "🌐", title: "Site Agenție", desc: "Website profesional generat automat cu listing-urile tale, pagini de agent și formulare integrate.", chips: ["Template-uri Premium", "Listing-uri Live"] },
+  { icon: "📱", title: "Campanii WA/Email", desc: "Trimite campanii targetate pe WhatsApp și Email către clienți segmentați, cu template-uri profesionale.", chips: ["WhatsApp Business API", "Email Marketing"] },
+  { icon: "📝", title: "Contracte", desc: "Generează, semnează și arhivează contracte digitale — de intermediere, pre-contracte și acte adiționale.", chips: ["Template-uri Contract", "Semnătură Electronică"] },
+  { icon: "📅", title: "Vizionări", desc: "Programează, gestionează și urmărești toate vizionările cu calendar integrat și feedback automat.", chips: ["Calendar Inteligent", "Checklist Vizionare"] },
+  { icon: "💰", title: "Comisioane", desc: "Tracking complet al comisioanelor — calculate, facturate și încasate, cu split automat între agenți.", chips: ["Calcul Automat", "Dashboard Financiar"] },
+  { icon: "📊", title: "Analytics", desc: "Rapoarte detaliate și insight-uri despre performanța agenției, agenților și a pieței imobiliare.", chips: ["Grafice Interactive", "Leaderboard Agenți"] },
+  { icon: "🤝", title: "MLS Partener", desc: "Colaborează cu alte agenții prin sistemul MLS — share proprietăți, split comisioane și extinde portofoliul.", chips: ["Rețea de Agenții", "Reguli de Colaborare"] },
 ];
 
 const funcItems = [
@@ -293,7 +293,7 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mt-8 md:mt-14">
             {modules.map(m => (
               <div key={m.title} className="p-5 rounded-[14px] relative overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-1" style={{ background: s.surface, border: `1px solid ${s.subtleBorder}` }}>
-                {m.badge && <div className="absolute top-3 right-3 text-[0.6rem] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full" style={{ background: "rgba(74,108,247,0.15)", border: "1px solid rgba(74,108,247,0.25)", color: "#7B9FF9" }}>{m.badge}</div>}
+                {(m as any).badge && <div className="absolute top-3 right-3 text-[0.6rem] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full" style={{ background: "rgba(74,108,247,0.15)", border: "1px solid rgba(74,108,247,0.25)", color: "#7B9FF9" }}>{(m as any).badge}</div>}
                 <div className="text-2xl mb-3">{m.icon}</div>
                 <div className="text-[0.9rem] font-semibold mb-1">{m.title}</div>
                 <div className="text-[0.78rem] leading-relaxed" style={{ color: s.text2 }}>{m.desc}</div>
