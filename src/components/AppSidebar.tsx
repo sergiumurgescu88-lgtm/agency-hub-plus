@@ -5,7 +5,7 @@ const navSections = [
   {
     label: "Principal",
     items: [
-      { icon: "⊞", title: "Dashboard", path: "/", badge: null },
+      { icon: "⊞", title: "Dashboard", path: "/dashboard", badge: null },
       { icon: "🏠", title: "Proprietăți", path: "/proprietati", badge: { text: "47", color: "teal" } },
       { icon: "👥", title: "Clienți & Leads", path: "/clienti", badge: { text: "8", color: "red" } },
       { icon: "📋", title: "Pipeline", path: "/pipeline", badge: null },
