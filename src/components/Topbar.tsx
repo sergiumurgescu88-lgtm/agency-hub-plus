@@ -4,14 +4,14 @@ import { ArrowLeft } from "lucide-react";
 export function Topbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isHome = location.pathname === "/";
+  const isDashboard = location.pathname === "/dashboard";
 
   return (
     <div className="bg-surface border-b border-subtle px-4 md:px-7 h-[52px] md:h-[58px] flex items-center gap-3 md:gap-4 sticky top-0 z-40">
       {/* Back to Dashboard */}
-      {!isHome && (
+      {!isDashboard && (
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashboard")}
           className="flex items-center gap-1.5 text-dim hover:text-foreground transition-colors text-[13px] mr-2 flex-shrink-0"
         >
           <ArrowLeft size={16} />
