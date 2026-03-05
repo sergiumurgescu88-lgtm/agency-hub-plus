@@ -212,18 +212,18 @@ export default function MLS() {
           <h1 className="text-xl font-extrabold flex items-center gap-2">🤝 MLS Partener</h1>
           <p className="text-sm text-dim mt-1">Colaborează cu agenții partenere — share proprietăți & split comisioane</p>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 bg-surface border border-subtle rounded-lg px-3 h-9 w-64">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 bg-surface border border-subtle rounded-lg px-3 h-9 w-full sm:w-64">
             <Search className="w-4 h-4 text-dim" />
             <input className="bg-transparent border-none text-sm outline-none flex-1 placeholder:text-dim" placeholder="Caută agenție sau proprietate..." value={search} onChange={e => setSearch(e.target.value)} />
           </div>
-          <Button variant="outline" size="sm" onClick={() => toast.success("📊 Export raport MLS")}><BarChart3 className="w-3.5 h-3.5" />Export</Button>
+          <Button variant="outline" size="sm" className="hidden md:inline-flex" onClick={() => toast.success("📊 Export raport MLS")}><BarChart3 className="w-3.5 h-3.5" />Export</Button>
           <Button size="sm" onClick={() => setInviteOpen(true)}><Plus className="w-3.5 h-3.5" />Invită Agenție</Button>
         </div>
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-4 gap-3.5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3.5">
         <StatCard label="Agenții Partenere" value={String(agencies.length)} sub={`↑ +3 luna aceasta`} colorClass="gold" />
         <StatCard label="Proprietăți Partajate" value="84" sub="În rețeaua MLS" colorClass="green" />
         <StatCard label="Colaborări Active" value="7" sub="↑ 2 tranzacții noi" colorClass="blue" />
@@ -232,7 +232,7 @@ export default function MLS() {
 
       {/* TABS */}
       <Tabs defaultValue="retea" className="space-y-4">
-        <TabsList className="bg-surface border border-subtle">
+        <TabsList className="bg-surface border border-subtle overflow-x-auto w-full justify-start">
           <TabsTrigger value="retea">🔗 Rețea Agenții</TabsTrigger>
           <TabsTrigger value="proprietati">🏠 Proprietăți MLS</TabsTrigger>
           <TabsTrigger value="colaborari">💼 Colaborări</TabsTrigger>
@@ -249,7 +249,7 @@ export default function MLS() {
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {filteredAgencies.map(ag => <AgencyCard key={ag.id} ag={ag} onConnect={connectAgency} />)}
           </div>
         </TabsContent>
@@ -353,7 +353,7 @@ export default function MLS() {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Perf chart */}
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">📈 Performanță Colaborări</CardTitle></CardHeader>
@@ -396,7 +396,7 @@ export default function MLS() {
 
         {/* TAB: REGULI CO-BROKER */}
         <TabsContent value="reguli" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
                 <CardTitle className="text-sm font-semibold">📋 Reguli Implicite Co-broker</CardTitle>

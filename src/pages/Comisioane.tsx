@@ -96,26 +96,26 @@ export default function Comisioane() {
 
   return (
     <DashboardLayout>
-      <div className="bg-surface border-b border-subtle px-7 h-[58px] flex items-center gap-4 sticky top-0 z-40">
+      <div className="bg-surface border-b border-subtle px-4 md:px-7 h-[52px] md:h-[58px] flex items-center gap-2 md:gap-4 sticky top-0 z-40">
         <div className="flex items-center gap-1.5 text-[13px] text-dim">
           <a href="/" className="hover:text-gold transition-colors">SocietyHUB</a>
           <span className="text-dim2">›</span>
           <span className="text-foreground font-medium">💰 Comisioane</span>
         </div>
-        <div className="ml-auto flex items-center gap-2.5">
-          <select value={periodo} onChange={e => { setPeriodo(e.target.value); toast({ title: `🔍 Filtrare: ${e.target.options[e.target.selectedIndex].text}` }); }} className="bg-surface2 border border-subtle rounded-lg px-3 py-[7px] text-[13px] text-foreground outline-none cursor-pointer">
+        <div className="ml-auto flex items-center gap-1.5 md:gap-2.5">
+          <select value={periodo} onChange={e => { setPeriodo(e.target.value); toast({ title: `🔍 Filtrare: ${e.target.options[e.target.selectedIndex].text}` }); }} className="bg-surface2 border border-subtle rounded-lg px-2 md:px-3 py-[7px] text-[12px] md:text-[13px] text-foreground outline-none cursor-pointer">
             <option value="luna">Luna Curentă</option>
             <option value="trimestru">Trimestrul I</option>
             <option value="an">Anul 2026</option>
           </select>
-          <button onClick={() => toast({ title: '🧾 Se generează factură…' })} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">🧾 Generează Factură</button>
-          <button onClick={() => toast({ title: '📤 Export Excel' })} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📤 Export</button>
-          <button onClick={() => setNewOpen(true)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-bold bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground hover:opacity-90 transition-all">＋ Comision Nou</button>
+          <button onClick={() => toast({ title: '🧾 Se generează factură…' })} className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">🧾 Generează Factură</button>
+          <button onClick={() => toast({ title: '📤 Export Excel' })} className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📤 Export</button>
+          <button onClick={() => setNewOpen(true)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] md:text-[12px] font-bold bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground hover:opacity-90 transition-all">＋ <span className="hidden sm:inline">Comision</span> Nou</button>
         </div>
       </div>
 
-      <div className="p-6 flex flex-col gap-5">
-        <div className="grid grid-cols-4 gap-3.5 animate-fade-up">
+      <div className="p-4 md:p-6 flex flex-col gap-4 md:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3.5 animate-fade-up">
           {[
             { label:'Comisioane Luna', value:'€48.5K', sub:'↑ +12% față de Feb', accent:'gradient-gold-bottom', green:true },
             { label:'Încasate', value:'€31.2K', sub:'64% din total', accent:'gradient-teal-bottom' },
@@ -142,7 +142,7 @@ export default function Comisioane() {
         </div>
 
         {tab === 'tranzactii' && (
-          <div className="grid grid-cols-[1fr_280px] gap-4 animate-fade-up-delay-2">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-4 animate-fade-up-delay-2">
             <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
               <div className="px-[18px] py-3.5 border-b border-subtle text-[13px] font-bold">💼 Comisioane Tranzacții — Martie 2026</div>
               <div className="overflow-x-auto">
@@ -214,7 +214,7 @@ export default function Comisioane() {
         )}
 
         {tab === 'agenti' && (
-          <div className="grid grid-cols-3 gap-3 animate-fade-up-delay-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 animate-fade-up-delay-2">
             {AGENTS_SPLIT.map((a, i) => (
               <div key={i} className="bg-surface border border-subtle rounded-xl p-[18px]">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-base text-primary-foreground mb-2.5" style={{ background: a.c }}>{initials(a.n)}</div>
@@ -243,7 +243,7 @@ export default function Comisioane() {
         )}
 
         {tab === 'cashflow' && (
-          <div className="grid grid-cols-[1fr_320px] gap-4 animate-fade-up-delay-2">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4 animate-fade-up-delay-2">
             <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
               <div className="px-4 py-3 border-b border-subtle text-[13px] font-bold">📊 Proiecție Cash-Flow 6 luni</div>
               <div className="p-4 flex items-end gap-2.5 h-[180px]">

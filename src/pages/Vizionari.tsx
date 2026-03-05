@@ -162,22 +162,22 @@ export default function Vizionari() {
   return (
     <DashboardLayout>
       {/* Custom topbar */}
-      <div className="bg-surface border-b border-subtle px-7 h-[58px] flex items-center gap-4 sticky top-0 z-40">
+      <div className="bg-surface border-b border-subtle px-4 md:px-7 h-[52px] md:h-[58px] flex items-center gap-2 md:gap-4 sticky top-0 z-40">
         <div className="flex items-center gap-1.5 text-[13px] text-dim">
           <a href="/" className="hover:text-gold transition-colors">SocietyHUB</a>
           <span className="text-dim2">›</span>
           <span className="text-foreground font-medium">📅 Vizionări</span>
         </div>
-        <div className="ml-auto flex items-center gap-2.5">
-          <button onClick={() => setTab('raport')} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📊 Raport</button>
-          <button onClick={() => toast({ title: '📤 Export Calendar .ics' })} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📤 Export</button>
-          <button onClick={() => setNewOpen(true)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-bold bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground hover:opacity-90 transition-all">＋ Programează Vizionare</button>
+        <div className="ml-auto flex items-center gap-1.5 md:gap-2.5">
+          <button onClick={() => setTab('raport')} className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📊 Raport</button>
+          <button onClick={() => toast({ title: '📤 Export Calendar .ics' })} className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium border border-subtle text-dim hover:bg-surface2 hover:text-foreground transition-all">📤 Export</button>
+          <button onClick={() => setNewOpen(true)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] md:text-[12px] font-bold bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground hover:opacity-90 transition-all"><span className="hidden md:inline">＋ Programează Vizionare</span><span className="md:hidden">＋ Vizionare</span></button>
         </div>
       </div>
 
-      <div className="p-6 flex flex-col gap-5">
+      <div className="p-4 md:p-6 flex flex-col gap-4 md:gap-5">
         {/* KPI STATS */}
-        <div className="grid grid-cols-5 gap-3.5 animate-fade-up">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 md:gap-3.5 animate-fade-up">
           {[
             { label:'Vizionări Azi', value:'3', sub:'08:00 – 17:00', accent:'gradient-gold-bottom' },
             { label:'Săptămâna Aceasta', value:'8', sub:'↑ +2 față de prev', accent:'gradient-blue-bottom', green: true },
@@ -211,7 +211,7 @@ export default function Vizionari() {
 
         {/* ═══ CALENDAR TAB ═══ */}
         {tab === 'calendar' && (
-          <div className="grid grid-cols-[1fr_320px] gap-4 animate-fade-up-delay-2">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4 animate-fade-up-delay-2">
             <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
               <div className="px-5 py-4 border-b border-subtle flex items-center gap-3">
                 <div className="font-serif text-sm font-bold">{MONTHS[curMonth]} {curYear}</div>
@@ -273,7 +273,7 @@ export default function Vizionari() {
         {tab === 'list' && (
           <div className="flex flex-col gap-2.5 animate-fade-up-delay-2">
             {data.map(v => (
-              <div key={v.id} className="bg-surface border border-subtle rounded-xl px-5 py-4 flex items-center gap-4 hover:border-gold/20 hover:-translate-y-px transition-all">
+              <div key={v.id} className="bg-surface border border-subtle rounded-xl px-3 md:px-5 py-3 md:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 hover:border-gold/20 hover:-translate-y-px transition-all">
                 <div className="w-11 h-11 rounded-[10px] flex items-center justify-center font-serif font-bold text-sm text-primary-foreground shrink-0" style={{ background: v.color }}>
                   {initials(v.client)}
                 </div>

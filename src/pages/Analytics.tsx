@@ -205,12 +205,12 @@ export default function Analytics() {
     <DashboardLayout>
     <div className="space-y-5 animate-fade-up p-4 md:p-7">
       {/* HEADER */}
-      <div className="flex items-center justify-between gap-3 flex-wrap">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-xl font-extrabold flex items-center gap-2">📊 Analytics</h1>
           <p className="text-sm text-dim mt-1">Rapoarte, performanță și insight-uri de piață</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <Select defaultValue="toti" onValueChange={() => toast.info("🔍 Filtru aplicat")}>
             <SelectTrigger className="h-8 text-xs w-36"><SelectValue /></SelectTrigger>
             <SelectContent>
@@ -227,14 +227,14 @@ export default function Analytics() {
               <SelectItem value="an">Anul 2025</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" className="text-xs" onClick={() => { toast.info("📊 Se generează PDF…"); setTimeout(() => toast.success("✅ PDF generat!"), 1600); }}><FileText className="w-3.5 h-3.5" />PDF</Button>
-          <Button variant="outline" size="sm" className="text-xs" onClick={() => { toast.info("📤 Se exportă Excel…"); setTimeout(() => toast.success("✅ Excel exportat!"), 1200); }}><Download className="w-3.5 h-3.5" />Excel</Button>
+          <Button variant="outline" size="sm" className="text-xs hidden md:inline-flex" onClick={() => { toast.info("📊 Se generează PDF…"); setTimeout(() => toast.success("✅ PDF generat!"), 1600); }}><FileText className="w-3.5 h-3.5" />PDF</Button>
+          <Button variant="outline" size="sm" className="text-xs hidden md:inline-flex" onClick={() => { toast.info("📤 Se exportă Excel…"); setTimeout(() => toast.success("✅ Excel exportat!"), 1200); }}><Download className="w-3.5 h-3.5" />Excel</Button>
           <Button size="sm" className="text-xs" onClick={() => toast.success("🔄 Date reîncărcate")}><RefreshCw className="w-3.5 h-3.5" />Refresh</Button>
         </div>
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-5 gap-3.5">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 md:gap-3.5">
         <StatCard label="Venituri Totale" value="€48.5K" sub="↑ +12% față de luna trecută" colorClass="gold" />
         <StatCard label="Tranzacții Finalizate" value="16" sub="↑ +3 față de Feb" colorClass="green" />
         <StatCard label="Clienți Activi" value="34" sub="↑ +7 noi luna asta" colorClass="blue" />
@@ -244,7 +244,7 @@ export default function Analytics() {
 
       {/* TABS */}
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList className="bg-surface border border-subtle">
+        <TabsList className="bg-surface border border-subtle overflow-x-auto w-full justify-start">
           <TabsTrigger value="overview">📈 Overview</TabsTrigger>
           <TabsTrigger value="leaderboard">🏆 Leaderboard</TabsTrigger>
           <TabsTrigger value="heatmap">🗺️ Heatmap Zone</TabsTrigger>
@@ -254,7 +254,7 @@ export default function Analytics() {
 
         {/* ══ OVERVIEW ══ */}
         <TabsContent value="overview" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Revenue Chart */}
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
@@ -310,7 +310,7 @@ export default function Analytics() {
           </div>
 
           {/* Row 2 */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle"><CardTitle className="text-sm font-semibold">🏠 Tip Proprietăți</CardTitle></CardHeader>
               <CardContent className="p-4">
@@ -334,7 +334,7 @@ export default function Analytics() {
 
         {/* ══ LEADERBOARD ══ */}
         <TabsContent value="leaderboard" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
                 <CardTitle className="text-sm font-semibold">🏆 Clasament Comisioane</CardTitle>
@@ -438,7 +438,7 @@ export default function Analytics() {
 
         {/* ══ HEATMAP ══ */}
         <TabsContent value="heatmap" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
                 <CardTitle className="text-sm font-semibold">🗺️ Activitate pe Zone — București</CardTitle>
@@ -530,7 +530,7 @@ export default function Analytics() {
 
         {/* ══ PIATA ══ */}
         <TabsContent value="piata" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
                 <CardTitle className="text-sm font-semibold">📈 Evoluție Preț €/mp</CardTitle>
@@ -612,7 +612,7 @@ export default function Analytics() {
 
         {/* ══ RAPOARTE ══ */}
         <TabsContent value="rapoarte" className="space-y-4 animate-fade-up">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader className="py-3 px-4 border-b border-subtle flex-row items-center justify-between">
                 <CardTitle className="text-sm font-semibold">📋 Rapoarte Disponibile</CardTitle>

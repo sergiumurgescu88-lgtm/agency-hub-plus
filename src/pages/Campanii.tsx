@@ -227,14 +227,14 @@ export default function Campanii() {
     <DashboardLayout>
       <SendOverlay show={sending} channel={channel} name={campaignName} onDone={onSendDone} />
       {/* Topbar */}
-      <div className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl border-b border-subtle px-4 md:px-7 h-[60px] flex items-center gap-3">
-        <div className="flex items-center gap-1.5 text-[13px] text-dim">
-          <span className="hover:text-gold cursor-pointer">SocietyHUB</span><span className="text-dim2">›</span><span className="text-foreground font-medium">📱 Campanii WA/Email</span>
+      <div className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl border-b border-subtle px-4 md:px-7 h-[52px] md:h-[60px] flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-1.5 text-[12px] md:text-[13px] text-dim">
+          <span className="hover:text-gold cursor-pointer">SocietyHUB</span><span className="text-dim2">›</span><span className="text-foreground font-medium">📱 Campanii</span>
         </div>
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-xs" onClick={() => setTab("campanii")}>📋 Campanii</Button>
-          <Button variant="outline" size="sm" className="text-xs" onClick={() => setTab("analytics")}>📊 Analytics</Button>
-          <Button size="sm" className="text-xs bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground font-bold hover:opacity-90" onClick={() => setNewModalOpen(true)}>＋ Campanie Nouă</Button>
+        <div className="ml-auto flex items-center gap-1.5 md:gap-2">
+          <Button variant="outline" size="sm" className="text-xs hidden md:inline-flex" onClick={() => setTab("campanii")}>📋 Campanii</Button>
+          <Button variant="outline" size="sm" className="text-xs hidden md:inline-flex" onClick={() => setTab("analytics")}>📊 Analytics</Button>
+          <Button size="sm" className="text-[11px] md:text-xs bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold2))] text-primary-foreground font-bold hover:opacity-90" onClick={() => setNewModalOpen(true)}>＋ <span className="hidden sm:inline">Campanie </span>Nouă</Button>
         </div>
       </div>
 
