@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 interface Deal {
   id: number;
@@ -127,6 +128,17 @@ export default function Pipeline() {
 
   const moveDeal = (id: number, newStage: number) => {
     setDeals((prev) => prev.map((d) => d.id === id ? { ...d, stage: newStage } : d));
+    toast({ title: `➡️ ${STAGES[newStage]}`, description: `Deal mutat la etapa „${STAGES[newStage]}".` });
+  };
+
+  const deleteDeal = (id: number, title: string) => {
+    setDeals((prev) => prev.filter((d) => d.id !== id));
+    setSelectedDeal(null);
+    toast({ title: "🗑️ Deal șters", description: `„${title}" a fost eliminat din pipeline.` });
+  };
+
+  const handleExport = () => {
+    toast({ title: "📥 Export", description: `Se exportă ${active.length} deal-uri active din pipeline.` });
   };
 
   const openAddModal = (stage = 0) => {
@@ -139,7 +151,7 @@ export default function Pipeline() {
       {/* Topbar */}
       <div className="bg-surface border-b border-subtle px-4 md:px-7 h-[52px] md:h-[58px] flex items-center gap-3 sticky top-0 z-40">
         <div className="flex items-center gap-1.5 text-xs md:text-[13px] text-muted-foreground">
-          <span className="cursor-pointer hover:text-primary transition-colors" onClick={() => navigate("/")}>⊞ Dashboard</span>
+          <span className="cursor-pointer hover:text-primary transition-colors" onClick={() => navigate("/dashboard")}>⊞ Dashboard</span>
           <span className="text-muted-foreground/40">›</span>
           <span className="text-foreground font-medium">📋 Pipeline Tranzacții</span>
         </div>
@@ -147,7 +159,7 @@ export default function Pipeline() {
           <button onClick={() => openAddModal()} className="hidden sm:flex items-center gap-1.5 border border-subtle bg-transparent text-muted-foreground rounded-lg px-3 py-1.5 text-xs font-medium hover:bg-surface2 hover:text-foreground transition-all cursor-pointer">+ Deal Nou</button>
           <button onClick={() => openAddModal()} className="sm:hidden w-9 h-9 bg-primary text-primary-foreground rounded-lg flex items-center justify-center text-lg font-bold">＋</button>
           <button onClick={() => setShowReport(!showReport)} className={`hidden md:flex items-center gap-1.5 border border-subtle rounded-lg px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${showReport ? "bg-primary/15 text-primary border-primary/25" : "bg-transparent text-muted-foreground hover:bg-surface2 hover:text-foreground"}`}>📈 Raport</button>
-          <button className="flex items-center gap-1.5 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground rounded-lg px-3 py-1.5 text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer">📥 Export</button>
+          <button onClick={handleExport} className="flex items-center gap-1.5 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground rounded-lg px-3 py-1.5 text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer">📥 Export</button>
         </div>
       </div>
 
@@ -158,7 +170,7 @@ export default function Pipeline() {
             <div className="flex items-center gap-3 mb-1">
               <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-[10px] flex items-center justify-center text-lg">📋</div>
               <h1 className="font-serif text-xl md:text-[22px] font-bold">Pipeline Tranzacții</h1>
-              <span className="text-[10.5px] font-bold px-2 py-1 rounded bg-yellow-400/12 text-yellow-400 border border-yellow-400/25 tracking-wider">ÎN DEZVOLTARE</span>
+              <span className="text-[10.5px] font-bold px-2 py-1 rounded bg-green-400/12 text-green-400 border border-green-400/25 tracking-wider">ACTIV</span>
             </div>
             <p className="text-muted-foreground text-[13px] ml-[52px]">Vizualizare Kanban — de la lead nou până la contract semnat.</p>
           </div>
@@ -172,7 +184,7 @@ export default function Pipeline() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 animate-fade-up-delay-1">
           {stats.map((s, i) => (
-            <div key={i} className="bg-card border border-subtle rounded-xl p-3.5 relative overflow-hidden hover:border-primary/25 hover:-translate-y-0.5 transition-all">
+            <div key={i} onClick={() => toast({ title: `📊 ${s.label}`, description: `${s.value} — ${s.sub}` })} className="bg-card border border-subtle rounded-xl p-3.5 relative overflow-hidden hover:border-primary/25 hover:-translate-y-0.5 transition-all cursor-pointer">
               <div className={`absolute top-0 left-0 right-0 h-[2px] ${s.accent}`} />
               <div className="text-[10px] font-semibold tracking-wider uppercase text-muted-foreground mb-1.5">{s.label}</div>
               <div className="font-serif text-xl md:text-2xl font-bold leading-none">{s.value}</div>
@@ -230,6 +242,10 @@ export default function Pipeline() {
               <SelectItem value="ok">🟢 OK</SelectItem>
             </SelectContent>
           </Select>
+          {(filterAgent !== "all" || filterType !== "all" || filterUrgency !== "all" || search) && (
+            <button onClick={() => { setFilterAgent("all"); setFilterType("all"); setFilterUrgency("all"); setSearch(""); toast({ title: "🔄 Filtre resetate" }); }}
+              className="text-[11px] text-danger font-medium bg-transparent border-none cursor-pointer hover:opacity-80">✕ Resetează</button>
+          )}
           <label className="hidden md:flex items-center gap-2 text-xs text-muted-foreground cursor-pointer ml-auto select-none">
             <input type="checkbox" checked={showClosed} onChange={(e) => setShowClosed(e.target.checked)} className="accent-primary" />
             Arată finalizate
@@ -344,7 +360,7 @@ export default function Pipeline() {
       <Sheet open={!!selectedDeal} onOpenChange={(o) => !o && setSelectedDeal(null)}>
         <SheetContent side="right" className="w-[340px] md:w-[390px] bg-card border-l border-subtle p-0 overflow-y-auto">
           <SheetTitle className="sr-only">Detalii Deal</SheetTitle>
-          {selectedDeal && <DealDetailPanel deal={selectedDeal} onMove={(stage) => { moveDeal(selectedDeal.id, stage); setSelectedDeal({ ...selectedDeal, stage }); }} onClose={() => setSelectedDeal(null)} />}
+          {selectedDeal && <DealDetailPanel deal={selectedDeal} onMove={(stage) => { moveDeal(selectedDeal.id, stage); setSelectedDeal({ ...selectedDeal, stage }); }} onClose={() => setSelectedDeal(null)} onDelete={() => deleteDeal(selectedDeal.id, selectedDeal.title)} />}
         </SheetContent>
       </Sheet>
 
@@ -354,7 +370,7 @@ export default function Pipeline() {
           <DialogHeader>
             <DialogTitle className="font-serif text-base font-bold">📋 Deal Nou</DialogTitle>
           </DialogHeader>
-          <AddDealForm stage={modalStage} onSave={(deal) => { setDeals((p) => [...p, deal]); setModalOpen(false); }} onCancel={() => setModalOpen(false)} />
+           <AddDealForm stage={modalStage} onSave={(deal) => { setDeals((p) => [...p, deal]); setModalOpen(false); toast({ title: "✅ Deal adăugat", description: `„${deal.title}" a fost adăugat în pipeline.` }); }} onCancel={() => setModalOpen(false)} />
         </DialogContent>
       </Dialog>
     </DashboardLayout>
@@ -416,7 +432,7 @@ function DealCard({ deal, onClick, onMove }: { deal: Deal; onClick: () => void; 
 }
 
 /* ─── Deal Detail Panel ─── */
-function DealDetailPanel({ deal, onMove, onClose }: { deal: Deal; onMove: (stage: number) => void; onClose: () => void }) {
+function DealDetailPanel({ deal, onMove, onClose, onDelete }: { deal: Deal; onMove: (stage: number) => void; onClose: () => void; onDelete: () => void }) {
   const initials = deal.client.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
   const agGrad = AGENT_GRADIENTS[deal.agent] || "from-gray-400 to-gray-500";
   const comm = Math.round(deal.value * deal.commPct / 100);
@@ -510,6 +526,7 @@ function DealDetailPanel({ deal, onMove, onClose }: { deal: Deal; onMove: (stage
           ) : (
             <div className="flex-1 py-2.5 rounded-lg text-xs font-bold text-green-400 border border-green-400/30 text-center">✅ Finalizat</div>
           )}
+          <button onClick={onDelete} className="px-3 py-2.5 rounded-lg bg-danger/10 border border-danger/25 text-danger text-xs font-medium cursor-pointer hover:bg-danger/20 transition-colors">🗑️</button>
           <button onClick={onClose} className="border border-subtle bg-transparent text-muted-foreground px-4 py-2.5 rounded-lg text-xs hover:bg-surface2 cursor-pointer">✕</button>
         </div>
       </div>
@@ -531,7 +548,10 @@ function AddDealForm({ stage, onSave, onCancel }: { stage: number; onSave: (deal
   const [notes, setNotes] = useState("");
 
   const handleSave = () => {
-    if (!title || !client) return;
+    if (!title.trim() || !client.trim()) {
+      toast({ title: "⚠️ Câmpuri obligatorii", description: "Completează cel puțin titlul și clientul.", variant: "destructive" });
+      return;
+    }
     onSave({
       id: Date.now(),
       title, client, agent,
