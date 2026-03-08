@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 const portals = [
   { logo: "OLX", name: "OLX Imobiliare", count: "47 anunțuri", active: true, cls: "bg-blue-dim text-info-blue border border-subtle" },
@@ -10,6 +12,28 @@ const portals = [
 
 export function PortalsCard() {
   const [toggles, setToggles] = useState(portals.map((p) => p.active));
+  const navigate = useNavigate();
+
+  const handleToggle = (i: number) => {
+    setToggles((t) => {
+      const newToggles = t.map((v, j) => (j === i ? !v : v));
+      const portal = portals[i];
+      toast({
+        title: newToggles[i] ? "✅ Portal Activat" : "⏸ Portal Dezactivat",
+        description: `${portal.name} a fost ${newToggles[i] ? "activat" : "dezactivat"}.`,
+      });
+      return newToggles;
+    });
+  };
+
+  const handlePublishAll = () => {
+    navigate("/portale");
+    toast({ title: "📤 Publicare", description: "Navighezi la secțiunea Portale pentru publicare în masă." });
+  };
+
+  const handleQuickPublish = () => {
+    toast({ title: "⚡ Publicare rapidă", description: "3 anunțuri noi au fost publicate pe toate portalele active!" });
+  };
 
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
@@ -17,7 +41,10 @@ export function PortalsCard() {
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>📤</span> Publicare Portale
         </div>
-        <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
+        <button
+          onClick={handlePublishAll}
+          className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+        >
           Publică tot →
         </button>
       </div>
@@ -30,7 +57,7 @@ export function PortalsCard() {
             <div className="text-[13px] font-medium flex-1">{p.name}</div>
             <div className="text-xs text-dim2">{p.count}</div>
             <div
-              onClick={() => setToggles((t) => t.map((v, j) => (j === i ? !v : v)))}
+              onClick={() => handleToggle(i)}
               className={`w-9 h-5 rounded-full relative cursor-pointer flex-shrink-0 transition-colors ${toggles[i] ? "bg-teal" : "bg-surface2"}`}
             >
               <div
@@ -39,7 +66,10 @@ export function PortalsCard() {
             </div>
           </div>
         ))}
-        <div className="mt-3 p-2.5 bg-teal-dim rounded-lg flex items-center gap-2">
+        <div
+          onClick={handleQuickPublish}
+          className="mt-3 p-2.5 bg-teal-dim rounded-lg flex items-center gap-2 cursor-pointer hover:bg-teal-dim/60 transition-colors"
+        >
           <span className="text-sm">⚡</span>
           <span className="text-xs text-teal">
             3 anunțuri noi nepublicate. <strong>Publică cu 1 click</strong>

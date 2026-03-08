@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+
 const columns = [
   {
     name: "Lead Nou", count: 5, colorClass: "bg-blue-dim text-info-blue",
@@ -31,6 +34,13 @@ const columns = [
 ];
 
 export function PipelineCard() {
+  const navigate = useNavigate();
+
+  const handleCardClick = (name: string) => {
+    toast({ title: "📋 Tranzacție", description: `Deschizi detaliile pentru: ${name}` });
+    navigate("/pipeline");
+  };
+
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden mb-3.5 animate-fade-up-delay-1">
       <div className="px-4 md:px-5 py-3 md:py-4 flex items-center justify-between border-b border-subtle">
@@ -41,7 +51,10 @@ export function PipelineCard() {
           <span className="hidden sm:inline text-[11px] font-medium px-2 py-0.5 rounded-md bg-gold-dim text-gold">
             Valoare totală: 284.600€
           </span>
-          <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
+          <button
+            onClick={() => navigate("/pipeline")}
+            className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+          >
             Gestionează →
           </button>
         </div>
@@ -59,6 +72,7 @@ export function PipelineCard() {
               {col.cards.map((card, i) => (
                 <div
                   key={i}
+                  onClick={() => handleCardClick(card.name)}
                   className="bg-surface2 border border-subtle rounded-lg p-[11px] mb-2 cursor-pointer hover:border-subtle2 hover:-translate-y-0.5 transition-all"
                 >
                   <div className="text-[12.5px] font-medium mb-1">{card.name}</div>

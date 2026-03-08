@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+
 const properties = [
   { type: "apt", emoji: "🏢", name: "Ap. 3 camere · Floreasca, B-ul Aviatorilor", meta: "95 mp · Et. 4/8 · Semidecomandat · Renovat 2023", status: "Activ", statusClass: "bg-teal-dim text-teal", price: "185.000€", priceType: "vânzare" },
   { type: "house", emoji: "🏡", name: "Casă individuală · Baneasa, Str. Plopilor", meta: "240 mp · Teren 450 mp · 5 camere · Garaj", status: "Vizionare", statusClass: "bg-gold-dim text-gold", price: "420.000€", priceType: "vânzare" },
@@ -14,13 +17,23 @@ const thumbBg: Record<string, string> = {
 };
 
 export function PropertiesCard() {
+  const navigate = useNavigate();
+
+  const handlePropertyClick = (name: string) => {
+    toast({ title: "🏠 Proprietate", description: `Deschizi detaliile: ${name.split("·")[0].trim()}` });
+    navigate("/proprietati");
+  };
+
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
       <div className="px-4 md:px-5 py-3 md:py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>🏠</span> Proprietăți Recente
         </div>
-        <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
+        <button
+          onClick={() => navigate("/proprietati")}
+          className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+        >
           Vezi toate (47) →
         </button>
       </div>
@@ -28,6 +41,7 @@ export function PropertiesCard() {
         {properties.map((p, i) => (
           <div
             key={i}
+            onClick={() => handlePropertyClick(p.name)}
             className="flex items-center gap-2.5 md:gap-3.5 py-3 border-b border-subtle last:border-b-0 cursor-pointer hover:opacity-80 transition-opacity"
           >
             <div className={`w-10 md:w-[52px] h-8 md:h-10 rounded-md flex items-center justify-center text-base md:text-lg bg-gradient-to-br ${thumbBg[p.type]} flex-shrink-0`}>
