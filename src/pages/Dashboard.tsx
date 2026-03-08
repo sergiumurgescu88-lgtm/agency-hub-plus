@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { Topbar } from "@/components/Topbar";
 import { KpiGrid } from "@/components/dashboard/KpiGrid";
@@ -9,11 +10,54 @@ import { PipelineCard } from "@/components/dashboard/PipelineCard";
 import { LeadsCard } from "@/components/dashboard/LeadsCard";
 import { MatchingCard } from "@/components/dashboard/MatchingCard";
 import { AgentPerformanceCard } from "@/components/dashboard/AgentPerformanceCard";
+import { toast } from "@/hooks/use-toast";
 
 const tabs = ["Overview", "Proprietăți", "Pipeline", "Analytics"];
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("Overview");
+  const navigate = useNavigate();
+
+  const handleQuickAction = (label: string) => {
+    switch (label) {
+      case "Adaugă Proprietate":
+        navigate("/proprietati");
+        toast({ title: "🏠 Proprietate Nouă", description: "Navighezi la secțiunea Proprietăți." });
+        break;
+      case "Publică pe Portale":
+        navigate("/portale");
+        toast({ title: "📤 Publicare", description: "Navighezi la secțiunea Portale Imobiliare." });
+        break;
+      case "Generează Contract":
+        navigate("/contracte");
+        toast({ title: "📝 Contract Nou", description: "Navighezi la secțiunea Contracte." });
+        break;
+      case "Programează Vizionare":
+        navigate("/vizionari");
+        toast({ title: "📅 Vizionare Nouă", description: "Navighezi la secțiunea Vizionări." });
+        break;
+    }
+  };
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    switch (tab) {
+      case "Proprietăți":
+        navigate("/proprietati");
+        break;
+      case "Pipeline":
+        navigate("/pipeline");
+        break;
+      case "Analytics":
+        navigate("/analytics");
+        break;
+    }
+  };
+
+  const handleMatchAlert = () => {
+    navigate("/matching");
+    toast({ title: "🤖 Matching AI", description: "Navighezi la match-urile identificate." });
+  };
 
   return (
     <DashboardLayout>
@@ -25,7 +69,10 @@ const Index = () => {
           <p className="text-[13px] text-dim flex-1">
             <strong className="text-gold">12 match-uri noi</strong> identificate de AI între cererile active și proprietățile din portofoliu. Potențial comision total: <strong className="text-gold">38.400€</strong>
           </p>
-          <button className="text-xs font-semibold text-gold bg-transparent border border-gold rounded-md px-3 py-[5px] cursor-pointer hover:bg-gold-dim transition-colors whitespace-nowrap">
+          <button
+            onClick={handleMatchAlert}
+            className="text-xs font-semibold text-gold bg-transparent border border-gold rounded-md px-3 py-[5px] cursor-pointer hover:bg-gold-dim transition-colors whitespace-nowrap"
+          >
             Vezi match-urile →
           </button>
         </div>
@@ -40,6 +87,7 @@ const Index = () => {
           ].map((qa) => (
             <div
               key={qa.label}
+              onClick={() => handleQuickAction(qa.label)}
               className="bg-surface border border-subtle rounded-xl p-3 sm:p-3.5 flex flex-col items-center gap-2 cursor-pointer hover:border-gold hover:bg-gold-dim transition-all"
             >
               <span className="text-[20px] sm:text-[22px]">{qa.icon}</span>
@@ -56,7 +104,7 @@ const Index = () => {
           {tabs.map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => handleTabChange(tab)}
               className={`px-3 md:px-4 py-[7px] rounded-[7px] text-[12px] md:text-[13px] font-medium cursor-pointer transition-all border-none whitespace-nowrap ${
                 activeTab === tab
                   ? "bg-gold-dim text-gold"

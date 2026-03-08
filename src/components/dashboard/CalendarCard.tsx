@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+
 const calDayHeaders = ["Lu", "Ma", "Mi", "Jo", "Vi", "Sâ", "Du"];
 
 const days = [
@@ -16,13 +20,32 @@ const events = [
 ];
 
 export function CalendarCard() {
+  const navigate = useNavigate();
+  const [selectedDay, setSelectedDay] = useState<number | null>(4);
+
+  const handleDayClick = (day: number, isOther?: boolean) => {
+    if (isOther) return;
+    setSelectedDay(day);
+    toast({ title: `📅 ${day} Martie 2026`, description: day === 4 ? "3 evenimente programate azi" : "Niciun eveniment programat." });
+  };
+
+  const handleEventClick = (name: string) => {
+    navigate("/vizionari");
+    toast({ title: "📅 Eveniment", description: `Deschizi detaliile: ${name}` });
+  };
+
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
       <div className="px-5 py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>📅</span> Calendar Vizionări
         </div>
-        <span className="text-xs text-gold font-medium">Martie 2026</span>
+        <button
+          onClick={() => navigate("/vizionari")}
+          className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+        >
+          Martie 2026
+        </button>
       </div>
       <div className="px-5 py-2">
         {/* Calendar Grid */}
@@ -33,16 +56,17 @@ export function CalendarCard() {
           {days.map((d, i) => (
             <div
               key={i}
+              onClick={() => handleDayClick(d.day, d.other)}
               className={`text-center text-xs py-1.5 rounded-md cursor-pointer transition-colors relative
-                ${d.today ? "bg-gold text-primary-foreground font-bold" : ""}
-                ${d.other ? "text-dim2" : ""}
-                ${!d.today && !d.other && d.event ? "font-semibold" : ""}
-                ${!d.today ? "hover:bg-surface2" : ""}
-                ${!d.today && !d.other ? "text-dim" : ""}
+                ${d.day === selectedDay && !d.other ? "bg-gold text-primary-foreground font-bold" : ""}
+                ${d.other ? "text-dim2 cursor-default" : ""}
+                ${d.day !== selectedDay && !d.other && d.event ? "font-semibold" : ""}
+                ${d.day !== selectedDay ? "hover:bg-surface2" : ""}
+                ${d.day !== selectedDay && !d.other ? "text-dim" : ""}
               `}
             >
               {d.day}
-              {d.event && !d.today && (
+              {d.event && d.day !== selectedDay && (
                 <div className="w-1 h-1 bg-teal rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
               )}
             </div>
@@ -51,7 +75,11 @@ export function CalendarCard() {
 
         {/* Events */}
         {events.map((e, i) => (
-          <div key={i} className="flex gap-2.5 items-start py-[9px] border-b border-subtle last:border-b-0">
+          <div
+            key={i}
+            onClick={() => handleEventClick(e.name)}
+            className="flex gap-2.5 items-start py-[9px] border-b border-subtle last:border-b-0 cursor-pointer hover:bg-surface2 rounded-md transition-colors px-1 -mx-1"
+          >
             <div className="text-[11px] text-dim2 min-w-[40px] mt-0.5">{e.time}</div>
             <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${e.color}`} />
             <div className="flex-1">

@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+
 const agents = [
   { initials: "AM", gradient: "from-gold to-orange-600", textColor: "text-primary-foreground", name: "Alexandru M.", stats: "12 prop · 4 tranzacții · 92% rată", commission: "8.240€" },
   { initials: "IP", gradient: "from-teal to-[#0a9b84]", textColor: "text-primary-foreground", name: "Ioana Preda", stats: "8 prop · 3 tranzacții · 87% rată", commission: "6.100€" },
@@ -8,13 +11,26 @@ const bars = [55, 35, 70, 45, 60, 50, 90];
 const months = ["Sep", "Oct", "Nov", "Dec", "Ian", "Feb", "Mar"];
 
 export function AgentPerformanceCard() {
+  const navigate = useNavigate();
+
+  const handleBarClick = (month: string, value: number) => {
+    toast({ title: `📊 ${month} 2026`, description: `Comisioane: ~${Math.round(value * 200)}€ generate în această lună.` });
+  };
+
+  const handleAgentClick = (name: string) => {
+    toast({ title: "👤 Profil Agent", description: `Deschizi profilul: ${name}` });
+  };
+
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
       <div className="px-5 py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>📊</span> Performanță Agenți
         </div>
-        <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
+        <button
+          onClick={() => navigate("/analytics")}
+          className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+        >
           Raport complet →
         </button>
       </div>
@@ -25,6 +41,7 @@ export function AgentPerformanceCard() {
           {bars.map((h, i) => (
             <div
               key={i}
+              onClick={() => handleBarClick(months[i], h)}
               className={`flex-1 rounded-t cursor-pointer transition-colors ${
                 i === bars.length - 1
                   ? "bg-gradient-to-t from-gold to-gold/60"
@@ -45,7 +62,11 @@ export function AgentPerformanceCard() {
         {/* Agent List */}
         <div className="mt-4">
           {agents.map((a, i) => (
-            <div key={i} className="flex items-center gap-3 py-2.5 border-b border-subtle last:border-b-0">
+            <div
+              key={i}
+              onClick={() => handleAgentClick(a.name)}
+              className="flex items-center gap-3 py-2.5 border-b border-subtle last:border-b-0 cursor-pointer hover:bg-surface2 rounded-md transition-colors px-1 -mx-1"
+            >
               <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${a.gradient} flex items-center justify-center text-xs font-bold flex-shrink-0 ${a.textColor}`}>
                 {a.initials}
               </div>

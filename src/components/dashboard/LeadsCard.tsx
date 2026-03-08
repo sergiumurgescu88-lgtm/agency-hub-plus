@@ -1,18 +1,35 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
+
 const leads = [
-  { initials: "RD", bg: "bg-[#1C3A5E]", color: "text-info-blue", name: "Radu Dumitru", req: "3 cam · Floreasca · Max 200K€", score: 92, scoreColor: "text-teal", barColor: "bg-teal" },
-  { initials: "MP", bg: "bg-[#1A3A1C]", color: "text-green-400", name: "Maria Popa", req: "2 cam · Domenii · Max 130K€", score: 78, scoreColor: "text-gold", barColor: "bg-gold" },
-  { initials: "SC", bg: "bg-[#2A1A3A]", color: "text-purple", name: "Stefan Ciobanu", req: "Studio · Centru · Max 95K€", score: 65, scoreColor: "text-gold", barColor: "bg-gold" },
-  { initials: "AI", bg: "bg-[#1A1A3A]", color: "text-info-blue", name: "Andrei Ionescu", req: "4 cam · Primăverii · Max 350K€", score: 43, scoreColor: "text-danger", barColor: "bg-danger" },
+  { initials: "RD", bg: "bg-[#1C3A5E]", color: "text-info-blue", name: "Radu Dumitru", req: "3 cam · Floreasca · Max 200K€", score: 92, scoreColor: "text-teal", barColor: "bg-teal", phone: "+40 721 123 456" },
+  { initials: "MP", bg: "bg-[#1A3A1C]", color: "text-green-400", name: "Maria Popa", req: "2 cam · Domenii · Max 130K€", score: 78, scoreColor: "text-gold", barColor: "bg-gold", phone: "+40 722 234 567" },
+  { initials: "SC", bg: "bg-[#2A1A3A]", color: "text-purple", name: "Stefan Ciobanu", req: "Studio · Centru · Max 95K€", score: 65, scoreColor: "text-gold", barColor: "bg-gold", phone: "+40 723 345 678" },
+  { initials: "AI", bg: "bg-[#1A1A3A]", color: "text-info-blue", name: "Andrei Ionescu", req: "4 cam · Primăverii · Max 350K€", score: 43, scoreColor: "text-danger", barColor: "bg-danger", phone: "+40 724 456 789" },
 ];
 
 export function LeadsCard() {
+  const navigate = useNavigate();
+
+  const handleCall = (name: string, phone: string) => {
+    toast({ title: "📞 Apel inițiat", description: `Apelezi pe ${name} la ${phone}` });
+  };
+
+  const handleMessage = (name: string) => {
+    toast({ title: "💬 Mesaj", description: `Deschizi conversația cu ${name}` });
+    navigate("/campanii");
+  };
+
   return (
     <div className="bg-surface border border-subtle rounded-xl overflow-hidden">
       <div className="px-5 py-4 flex items-center justify-between border-b border-subtle">
         <div className="text-sm font-semibold flex items-center gap-2">
           <span>🎯</span> Leads Noi — Azi
         </div>
-        <button className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer">
+        <button
+          onClick={() => navigate("/clienti")}
+          className="text-xs text-gold font-medium hover:opacity-80 bg-transparent border-none cursor-pointer"
+        >
           Toate (83) →
         </button>
       </div>
@@ -33,8 +50,18 @@ export function LeadsCard() {
               </div>
             </div>
             <div className="flex gap-1.5">
-              <div className="w-7 h-7 rounded-md border border-subtle bg-surface2 flex items-center justify-center text-[13px] cursor-pointer hover:border-gold hover:bg-gold-dim transition-all">📞</div>
-              <div className="w-7 h-7 rounded-md border border-subtle bg-surface2 flex items-center justify-center text-[13px] cursor-pointer hover:border-gold hover:bg-gold-dim transition-all">💬</div>
+              <div
+                onClick={() => handleCall(l.name, l.phone)}
+                className="w-7 h-7 rounded-md border border-subtle bg-surface2 flex items-center justify-center text-[13px] cursor-pointer hover:border-gold hover:bg-gold-dim transition-all"
+              >
+                📞
+              </div>
+              <div
+                onClick={() => handleMessage(l.name)}
+                className="w-7 h-7 rounded-md border border-subtle bg-surface2 flex items-center justify-center text-[13px] cursor-pointer hover:border-gold hover:bg-gold-dim transition-all"
+              >
+                💬
+              </div>
             </div>
           </div>
         ))}
